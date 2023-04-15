@@ -1,14 +1,23 @@
 # Criação projeto em angular
 
-Instalar angular, checar instalção/versão com ng version<br><br>
+## Para criar um projeto
 
-Abrir o vscode ir para a pasta em que o projeto será criado, abrir o terminal<br><br>
+Instalar o angular <br>
+Checar instalação/versão com ng version<br>
+Abrir o vscode e ir para a pasta em que o projeto será criado<br>
+Abrir o terminal no vscode<br>
+Para criar um novo projeto: <br>
++ **_ng new (nome do projeto)_**<br>
 
-Para criar um novo projeto: ng new (nome do projeto)<br>
-Para rodar o projeto: ng serve<br>
-  >em seguida clicar no link disponibilizado no terminal<br><br>
+## Para rodar o projeto
+
+Para rodar o projeto: <br>
++ **_ng serve_**<br>
+ >Em seguida clicar no link disponibilizado no terminal<br>
   
-  >Certifique-se de estar na página do projeto, caso contrário seu projeto não irá compilar<br>
-  >Utilize: cd (nome do projeto), para ir até a pasta em questão<br>
+ >Certifique-se de estar na página do projeto, caso contrário seu projeto não irá compilar<br>
+ >Utilize: <br>
+ > + **_cd (nome do projeto)_**<br>
+ > para ir até a pasta em questão<br>
   
   
