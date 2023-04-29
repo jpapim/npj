@@ -1,3 +1,7 @@
+# Núcleo de Prática Jurídica
+
+Sistema em desenvolvimento para facilitar o trabalho do NPJ (Núcleo de Prática Jurídica) da [Universidade Projeção](https://projecao.br/)
+
 # Criação projeto em angular
 
 ## Para criar um projeto
