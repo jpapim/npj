@@ -19,5 +19,8 @@ Para rodar o projeto: <br>
  >Utilize: <br>
  > + **_cd (nome do projeto)_**<br>
  > para ir até a pasta em questão<br>
+ 
+ 
   
   
+![CasosDeUso](https://user-images.githubusercontent.com/106937501/235307626-f4bc81e7-9cb6-490b-99bc-57728270c753.jpg)
