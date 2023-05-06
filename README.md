@@ -28,3 +28,6 @@ Para rodar o projeto: <br>
   
   
 ![CasosDeUso](https://user-images.githubusercontent.com/106937501/235307626-f4bc81e7-9cb6-490b-99bc-57728270c753.jpg)
+
+prototipo Figma:<br><br> https://www.figma.com/file/72WoG9x1F5B69vzrIlA4Cp/GJUR-model?type=design&node-id=0%3A1&t=TngPoADUtBckcOF9-1
+
