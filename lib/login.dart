@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_application_1/register.dart';
 
+import 'register.dart';
 import 'forget_password.dart';
 import 'home.dart';
 
@@ -21,7 +21,6 @@ class LoginPage extends StatelessWidget {
       );
     } catch (e) {
       print('Error: $e');
-      // Aqui você pode exibir uma mensagem de erro ao usuário, se necessário
     }
   }
 

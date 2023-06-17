@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_application_1/register.dart';
 
+import 'register.dart';
 import 'login.dart';
 
 class ForgetPasswordPage extends StatelessWidget {
@@ -12,10 +12,8 @@ class ForgetPasswordPage extends StatelessWidget {
       await FirebaseAuth.instance.sendPasswordResetEmail(
         email: emailController.text,
       );
-      // Aqui você pode adicionar o código para exibir uma mensagem de sucesso ao usuário
     } catch (e) {
       print('Error: $e');
-      // Aqui você pode exibir uma mensagem de erro ao usuário, se necessário
     }
   }
 
