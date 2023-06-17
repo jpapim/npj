@@ -16,10 +16,8 @@ class RegisterPage extends StatelessWidget {
         email: emailController.text,
         password: passwordController.text,
       );
-      // Aqui você pode adicionar o código para redirecionar para a página inicial após o registro bem-sucedido
     } catch (e) {
       if (e is FirebaseAuthException && e.code.toString() == 'auth/email-already-exists') {
-        print('teste1');
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -39,9 +37,7 @@ class RegisterPage extends StatelessWidget {
         );
       } else {
         // ignore: avoid_print
-        print('teste2');
         print('Error: $e');
-        // Aqui você pode exibir uma mensagem de erro ao usuário, se necessário
       }
     }
   }

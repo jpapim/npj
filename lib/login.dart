@@ -21,7 +21,6 @@ class LoginPage extends StatelessWidget {
       );
     } catch (e) {
       print('Error: $e');
-      // Aqui você pode exibir uma mensagem de erro ao usuário, se necessário
     }
   }
 
