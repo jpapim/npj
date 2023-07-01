@@ -1,92 +1,131 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
-import '../login.dart';
-import '../home.dart';
 import 'assisted.dart';
 import 'reports.dart';
 import 'schedule.dart';
-import 'statistics.dart';
 import 'settings.dart';
+import 'statistics.dart';
 
-class PermissionsPage extends StatefulWidget {
+void main() => runApp(const PermissionsPage());
+
+class PermissionsPage extends StatelessWidget {
+  const PermissionsPage({super.key});
+
+  static const appTitle = 'GProJuridico';
+
   @override
-  _PermissionsPageState createState() => _PermissionsPageState();
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: appTitle,
+      home: MyPermissionsPage(title: appTitle),
+    );
+  }
 }
 
-class _PermissionsPageState extends State<PermissionsPage> {
-  int _currentIndex = 0;
+class MyPermissionsPage extends StatelessWidget {
+  const MyPermissionsPage({super.key, required this.title});
 
-  final List<Widget> _pages = [
-    HomePage(),
-    AssistedPage(),
-    ReportsPage(),
-    SchedulePage(),
-    PermissionsPage(),
-    StatisticsPage(),
-    SettingsPage(),
-  ];
-
-  void _signOut(BuildContext context) async {
-    try {
-      await FirebaseAuth.instance.signOut();
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => LoginPage()),
-        (route) => false,
-      );
-    } catch (e) {
-      print('Error: $e');
-      // Aqui você pode exibir uma mensagem de erro ao usuário, se necessário
-    }
-  }
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text('Home'),
+      appBar: AppBar(title: Text(title)),
+      body: const Center(
+        child: Text('Permissões'),
       ),
-      body: _pages[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.people),
-            label: 'Assisted',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.receipt),
-            label: 'Reports',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            label: 'Schedule',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.lock),
-            label: 'Permissions',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.pie_chart),
-            label: 'Statistics',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-        ],
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                image: DecorationImage(
+                  image: AssetImage("../imagens/logo.jpg"),
+                     fit: BoxFit.cover)
+              ),
+              child: Text(''),
+            ),
+            ListTile(
+              title: const Text('Assistidos'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AssistedPage()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Permissões'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const PermissionsPage()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Relatórios'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ReportsPage()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Agenda'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SchedulePage()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Estatisticas'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const StatisticsPage()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Configurações'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SettingsPage()),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
-}
+  }

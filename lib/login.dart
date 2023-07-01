@@ -5,6 +5,22 @@ import 'register.dart';
 import 'forget_password.dart';
 import 'home.dart';
 
+//Linhas de código abaixo para conseguir captar o FirebaseAuthException
+String parseFirebaseAuthExceptionMessage({String plugin = "auth", required String? input}) {
+  if (input == null) {
+    return "unknown";
+  }
+
+  String regexPattern = r'(?<=\(' + plugin + r'/)(.*?)(?=\)\.)';
+  RegExp regExp = RegExp(regexPattern);
+  Match? match = regExp.firstMatch(input);
+  if (match != null) {
+    return match.group(0)!;
+  }
+
+  return "unknown";
+}
+
 class LoginPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -17,10 +33,21 @@ class LoginPage extends StatelessWidget {
       );
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => const HomePage()),
       );
+    } on FirebaseAuthException catch (e) {
+      final code = parseFirebaseAuthExceptionMessage(input: e.message);
+
+      if (code == 'wrong-password') {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Password Provided isnt valid')));
+      } else if (code == 'invalid-email' || code == 'user-not-found') {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('User not found')));
+      }
     } catch (e) {
-      print('Error: $e');
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
     }
   }
 

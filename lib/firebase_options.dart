@@ -44,40 +44,39 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAXUEUxA3-vaHA1qebNN2z4Vdr-9sao0GY',
-    appId: '1:29954221794:web:dc4cb251fcaf3ad24fe0bb',
-    messagingSenderId: '29954221794',
-    projectId: 'gjur-16bc7',
-    authDomain: 'gjur-16bc7.firebaseapp.com',
-    storageBucket: 'gjur-16bc7.appspot.com',
-    measurementId: 'G-VEVLD0TRHQ',
+    apiKey: 'AIzaSyCuYaLI69-Xo1rA-L0Bc75fGYmsQAUjmLs',
+    appId: '1:1008185412104:web:7a328ccf138dbc11751fbd',
+    messagingSenderId: '1008185412104',
+    projectId: 'gprojuridico',
+    authDomain: 'gprojuridico.firebaseapp.com',
+    storageBucket: 'gprojuridico.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDLVoLKoagXaOk-TRDk27d-CLSb0X8PPQc',
-    appId: '1:29954221794:android:a32eed89119e2d4b4fe0bb',
-    messagingSenderId: '29954221794',
-    projectId: 'gjur-16bc7',
-    storageBucket: 'gjur-16bc7.appspot.com',
+    apiKey: 'AIzaSyDjk3JTUMS-e38AITVzmUYSmRAWus-Dkhk',
+    appId: '1:1008185412104:android:7b56949686c9f48f751fbd',
+    messagingSenderId: '1008185412104',
+    projectId: 'gprojuridico',
+    storageBucket: 'gprojuridico.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCtF0dkmNElbCOqxb2bP6vFOO-u9dDKO6Y',
-    appId: '1:29954221794:ios:df22c172352df83f4fe0bb',
-    messagingSenderId: '29954221794',
-    projectId: 'gjur-16bc7',
-    storageBucket: 'gjur-16bc7.appspot.com',
-    iosClientId: '29954221794-putooos8ag3lhmlguild8g0a4ecvfocf.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCmifVKJ9p-RBpVTjAb7EGaV6KZfrurYZY',
+    appId: '1:1008185412104:ios:c80bfc7f8d0a0398751fbd',
+    messagingSenderId: '1008185412104',
+    projectId: 'gprojuridico',
+    storageBucket: 'gprojuridico.appspot.com',
+    iosClientId: '1008185412104-l7bhgn521ogf4kijq2cj7aqbhjbqbhrv.apps.googleusercontent.com',
     iosBundleId: 'com.example.npj',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCtF0dkmNElbCOqxb2bP6vFOO-u9dDKO6Y',
-    appId: '1:29954221794:ios:e1f81639d81e98ed4fe0bb',
-    messagingSenderId: '29954221794',
-    projectId: 'gjur-16bc7',
-    storageBucket: 'gjur-16bc7.appspot.com',
-    iosClientId: '29954221794-qf4hfojfaliljgjnuf6mtpdjheilsun2.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCmifVKJ9p-RBpVTjAb7EGaV6KZfrurYZY',
+    appId: '1:1008185412104:ios:160aeb886fa66819751fbd',
+    messagingSenderId: '1008185412104',
+    projectId: 'gprojuridico',
+    storageBucket: 'gprojuridico.appspot.com',
+    iosClientId: '1008185412104-ldfnv2u3amhu6m3jnq9bi6m0j018ddet.apps.googleusercontent.com',
     iosBundleId: 'com.example.npj.RunnerTests',
   );
 }
