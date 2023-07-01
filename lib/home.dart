@@ -33,7 +33,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(title)),
       body: const Center(
-        child: Text('Página principal'),
+        child: Text('Página principal sistema'),
       ),
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
