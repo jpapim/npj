@@ -7,6 +7,8 @@ import 'login.dart';
 class ForgetPasswordPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
 
+  ForgetPasswordPage({super.key});
+
   void _resetPassword(BuildContext context) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(

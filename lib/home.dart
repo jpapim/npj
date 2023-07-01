@@ -1,94 +1,132 @@
 import 'package:flutter/material.dart';
 
-/// Flutter code sample for [BottomNavigationBar].
+import 'pages/assisted.dart';
+import 'pages/permissions.dart';
+import 'pages/reports.dart';
+import 'pages/schedule.dart';
+import 'pages/settings.dart';
+import 'pages/statistics.dart';
 
-void main() => runApp(const HomePageApp());
+void main() => runApp(const HomePage());
 
-class HomePageApp extends StatelessWidget {
-  const HomePageApp({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  static const appTitle = 'GProJuridico';
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: HomePage(),
+      title: appTitle,
+      home: MyHomePage(title: appTitle),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key, required this.title});
 
-  @override
-  State<HomePage> createState() =>
-      _HomePageState();
-}
-
-class _HomePageState
-    extends State<HomePage> {
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Menu',
-      style: optionStyle,
-    ),
-    Text(
-      'Relatórios',
-      style: optionStyle,
-    ),
-    Text(
-      'Assistidos',
-      style: optionStyle,
-    ),
-    Text(
-      'Configurações',
-      style: optionStyle,
-    ),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('GJUR'),
+      appBar: AppBar(title: Text(title)),
+      body: const Center(
+        child: Text('Página principal'),
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Menu',
-            backgroundColor: Colors.red,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Relatórios',
-            backgroundColor: Colors.green,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'Assistidos',
-            backgroundColor: Colors.purple,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Configurações',
-            backgroundColor: Colors.pink,
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                image: DecorationImage(
+                  image: AssetImage("../imagens/logo.jpg"),
+                     fit: BoxFit.cover)
+              ),
+              child: Text(''),
+            ),
+            ListTile(
+              title: const Text('Assistidos'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AssistedPage()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Permissões'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const PermissionsPage()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Relatórios'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ReportsPage()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Agenda'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SchedulePage()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Estatisticas'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const StatisticsPage()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Configurações'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SettingsPage()),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
-}
+  }
