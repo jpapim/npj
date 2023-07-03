@@ -179,7 +179,7 @@ class _MyAssistedPageState extends State<MyAssistedPage> {
     ),
 
     Expanded(
-     flex: 1,
+     
      child: ListView.builder(
       itemCount: users.length,
       itemBuilder: (context, index) {
