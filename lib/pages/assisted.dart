@@ -1,6 +1,3 @@
-import 'dart:html';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:npj/home.dart';
 
@@ -11,7 +8,7 @@ import 'settings.dart';
 import 'statistics.dart';
 
 class AssistedPage extends StatelessWidget {
-  const AssistedPage({super.key});
+  const AssistedPage({Key? key});
 
   static const appTitle = 'GProJuridico';
 
@@ -37,7 +34,7 @@ class AssistedPage extends StatelessWidget {
 }
 
 class MyAssistedPage extends StatefulWidget {
-  const MyAssistedPage({super.key, required this.title});
+  const MyAssistedPage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -177,7 +174,7 @@ class _MyAssistedPageState extends State<MyAssistedPage> {
               children: [
                 Expanded(
                   child: PaginatedDataTable(
-                    arrowHeadColor: Color.fromARGB(255, 38, 29, 68),
+                    arrowHeadColor: const Color.fromARGB(255, 38, 29, 68),
                     showFirstLastButtons: true,
                     source: _data,
                     headingRowHeight: 40,
@@ -243,7 +240,7 @@ class _MyAssistedPageState extends State<MyAssistedPage> {
       //Inicio Menu Lateral
       drawer: Theme(
         data: Theme.of(context).copyWith(
-          canvasColor: Color.fromARGB(255, 24, 18, 43),
+          canvasColor: const Color.fromARGB(255, 24, 18, 43),
         ),
         child: Drawer(
           // Add a ListView to the drawer. This ensures the user can scroll
