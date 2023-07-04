@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:npj/home.dart';
 
 import 'assisted.dart';
 import 'permissions.dart';
@@ -11,12 +12,24 @@ void main() => runApp(const ReportsPage());
 class ReportsPage extends StatelessWidget {
   const ReportsPage({super.key});
 
-  static const appTitle = 'GProJuridico';
+  static const appTitle = 'GPRO';
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: appTitle,
+      theme: ThemeData(
+        colorSchemeSeed: const Color.fromARGB(255, 15, 12, 29),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromARGB(255, 24, 18, 43),
+          centerTitle: true,
+          titleTextStyle: TextStyle(
+            fontSize: 44,
+            fontFamily: "Built-SemiBold",
+            color: Colors.white,
+          ),
+        ),
+      ),
       home: MyReportsPage(title: appTitle),
     );
   }
@@ -31,101 +44,165 @@ class MyReportsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(title)),
-      body: const Center(
-        child: Text('Relatórios'),
-      ),
-      drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                image: DecorationImage(
-                  image: AssetImage("../imagens/logo.jpg"),
-                     fit: BoxFit.cover)
+      body: Column(
+        children: [
+          Container(
+            height: 50,
+            color: const Color.fromARGB(255, 50, 39, 85),
+            child: const Row(
+              children: [
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "RELATÓRIOS",
+                      style: TextStyle(
+                        fontSize: 22,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Center(
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: 200,
               ),
-              child: Text(''),
+              child: Text('Relatórios'),
             ),
-            ListTile(
-              title: const Text('Assistidos'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AssistedPage()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Permissões'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const PermissionsPage()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Relatórios'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ReportsPage()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Agenda'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SchedulePage()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Estatisticas'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const StatisticsPage()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Configurações'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SettingsPage()),
-                );
-              },
-            ),
-          ],
+          ),
+        ],
+      ),
+      drawer: Theme(
+        data: Theme.of(context).copyWith(
+          canvasColor: Color.fromARGB(255, 24, 18, 43),
+        ),
+        child: Drawer(
+          // Add a ListView to the drawer. This ensures the user can scroll
+          // through the options in the drawer if there isn't enough vertical
+          // space to fit everything.
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: [
+              Container(
+                height: 120,
+                width: 100,
+                margin: const EdgeInsets.all(25),
+                decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 24, 18, 43),
+                    image: DecorationImage(
+                        image: AssetImage("../imagens/gpro.png"),
+                        fit: BoxFit.fill)),
+                child: const Text(''),
+              ),
+              ListTile(
+                leading: const Icon(Icons.home, color: Colors.white),
+                title:
+                    const Text('Menu', style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomePage()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.menu, color: Colors.white),
+                title: const Text('Assistidos',
+                    style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AssistedPage()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.person, color: Colors.white),
+                title: const Text('Permissões',
+                    style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const PermissionsPage()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.download, color: Colors.white),
+                title: const Text('Relatórios',
+                    style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.calendar_month, color: Colors.white),
+                title:
+                    const Text('Agenda', style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SchedulePage()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.bar_chart, color: Colors.white),
+                title: const Text('Estatisticas',
+                    style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const StatisticsPage()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.settings, color: Colors.white),
+                title: const Text('Configurações',
+                    style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SettingsPage()),
+                  );
+                },
+              )
+            ],
+          ),
         ),
       ),
     );
   }
-  }
+}

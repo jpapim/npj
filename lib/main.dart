@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:npj/home.dart';
+import 'package:npj/login.dart';
+import 'package:npj/pages/assisted.dart';
 import 'package:npj/register.dart';
 import 'firebase_options.dart';
 
@@ -20,11 +23,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'GproJuridico',
+      title: 'GPRO',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorSchemeSeed: const Color.fromARGB(255, 15, 12, 29),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromARGB(255, 24, 18, 43),
+          centerTitle: true,
+          titleTextStyle: TextStyle(
+            fontSize: 44,
+            fontFamily: "Built-SemiBold",
+            color: Colors.white,
+          ),
+        ),
       ),
-      home: RegisterPage(), //alterar aqui página inicial modo teste
+      home: LoginPage(), //alterar aqui página inicial modo teste
     );
   }
 }

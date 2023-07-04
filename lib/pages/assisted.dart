@@ -1,3 +1,6 @@
+import 'dart:html';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:npj/home.dart';
 
@@ -7,23 +10,6 @@ import 'schedule.dart';
 import 'settings.dart';
 import 'statistics.dart';
 
-
-class User {
-  final String username;
-  final String statusAssitido;
-  final String processo;
-  final String urlAvatar;
-  final String triagem;
-
-  const User({
-    required this.urlAvatar,
-    required this.statusAssitido,
-    required this.processo,
-    required this.username,
-    required this.triagem,
-  });
-}
-
 class AssistedPage extends StatelessWidget {
   const AssistedPage({super.key});
 
@@ -31,14 +17,24 @@ class AssistedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: appTitle,
-      home: MyAssistedPage(title: appTitle),
+      theme: ThemeData(
+        colorSchemeSeed: const Color.fromARGB(255, 15, 12, 29),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromARGB(255, 24, 18, 43),
+          centerTitle: true,
+          titleTextStyle: TextStyle(
+            fontSize: 44,
+            fontFamily: "Built-SemiBold",
+            color: Colors.white,
+          ),
+        ),
+      ),
+      home: const MyAssistedPage(title: appTitle),
     );
   }
 }
-
-final _formKey = GlobalKey<FormState>();
 
 class MyAssistedPage extends StatefulWidget {
   const MyAssistedPage({super.key, required this.title});
@@ -50,327 +46,388 @@ class MyAssistedPage extends StatefulWidget {
 }
 
 class _MyAssistedPageState extends State<MyAssistedPage> {
- List<User> users = [
-  const User(
-   username: 'Sarah Abs',
-   statusAssitido: "Represetante Legal",
-   processo: "54365",
-   triagem: "4522",
-   urlAvatar: "../../imagens/avatarfeminino.png",
-  ),
-  const User(
-   username: 'Nina quem',
-   statusAssitido: "Represetante Legal",
-   processo: "54325",
-   triagem: "4522",
-   urlAvatar: '../../imagens/avatarfeminino.png',
-  ),
-  const User(
-   username: 'Steve richard',
-   statusAssitido: "Represetante Legal",
-   processo: "54375",
-   triagem: "4522",
-   urlAvatar: '../../imagens/avatarMasculino.png',
-  ),
-  const User(
-   username: 'Fernando Silva',
-   statusAssitido: "Assistido",
-   processo: "54385",
-   triagem: "4111",
-   urlAvatar: '../../imagens/avatarMasculino.png',
-  ),
-  const User(
-   username: 'Fernando Silva',
-   statusAssitido: "Assistido",
-   processo: "78555",
-   triagem: "4522",
-   urlAvatar: '../../imagens/avatarMasculino.png',
-  ),
-  const User(
-   username: 'Fernando Silva',
-   statusAssitido: "Assistido",
-   processo: "99343",
-   triagem: "4112",
-   urlAvatar: '../../imagens/avatarMasculino.png',
-  ),
-  const User(
-   username: 'Fernando Silva',
-   statusAssitido: "Represetante Legal",
-   processo: "12312",
-   triagem: "2134",
-   urlAvatar: '../../imagens/avatarMasculino.png',
-  ),
-  const User(
-   username: 'Fernando Silva',
-   statusAssitido: "Assistido",
-   processo: "99343",
-   triagem: "4112",
-   urlAvatar: '../../imagens/avatarMasculino.png',
-  ),
-  const User(
-   username: 'Fernando Silva',
-   statusAssitido: "Represetante Legal",
-   processo: "12312",
- triagem: "2134",
-   urlAvatar: '../../imagens/avatarMasculino.png',
-  ),
-  const User(
-   username: 'Fernando Silva',
-   statusAssitido: "Assistido",
-   processo: "99343",
-   triagem: "4112",
-   urlAvatar: '../../imagens/avatarMasculino.png',
-  ),
-  const User(
-   username: 'Fernando Silva',
-   statusAssitido: "Assistido",
-   processo: "99343",
-   triagem: "4112",
-   urlAvatar: '../../imagens/avatarMasculino.png',
-  ),
-  const User(
-   username: 'Fernando Silva',
-   statusAssitido: "Represetante Legal",
-   processo: "12312",
-   triagem: "2134",
-   urlAvatar: '../../imagens/avatarMasculino.png',
-  )
-
- ];
+  final DataTableSource _data = MyData();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Menu dos Assistidos',style: TextStyle(fontSize: 23,fontWeight: FontWeight.w600),),
-   centerTitle: true,),
-      body: Column(
-   children: [
-    Row(
-     children: [
-      Expanded(
-
-        child: Padding(
-         padding: const EdgeInsets.all(5.0),
-         child: Wrap(
-          spacing: 12,
+      appBar: AppBar(title: const Text("GPRO")),
+      body: SingleChildScrollView(
+        child: Column(
           children: [
-           IconButton(onPressed: () => _dialogBuilder(context), icon: const Icon(Icons.add)),
-           const Text("Adicionar Assistido", style: TextStyle(fontSize: 25,height: 1.5),),
-          ],
-         ),
-        )
-      ),
-      const Expanded(
-        child: Padding(
-         padding: EdgeInsets.all(5.0),
-         child: Wrap(
-          spacing: 12,
-          children: [
-           TextField(
-            decoration: InputDecoration(
-             labelText: "Filtrar por assistido, processo,triagem...", suffixIcon: Icon(Icons.search),
-            ),
-           ),
-          ],
-         ),
-        )
-      )
-     ],
-    ),
-
-    Expanded(
-     flex: 1,
-     child: ListView.builder(
-      itemCount: users.length,
-      itemBuilder: (context, index) {
-       final user = users[index];
-       return Card(
-        child: ListTile(
-         leading: Expanded(
-          child: CircleAvatar(
-           radius: 28,
-           backgroundImage: AssetImage(user.urlAvatar),
-           backgroundColor: Colors.white,
-          ),
-         ),
-         title:
-         Text( "${user.username} (${user.statusAssitido})"),
-         subtitle: Text("número processo ${user.processo} / triagem ${user.triagem}"),
-         trailing: Expanded(
-          child: Wrap(
-           spacing: 12,
-           children: [
-            IconButton(onPressed: (){}, icon: const Icon(Icons.settings,color: Colors.black87,)),
-            IconButton(onPressed: (){}, icon: const Icon(Icons.attach_file,color: Colors.black87,)),
-            IconButton(onPressed: (){}, icon: const Icon(Icons.save,color: Colors.black87,)),
-            IconButton(onPressed: (){}, icon: const Icon(Icons.list,color: Colors.black87,)),
-            IconButton(onPressed: (){}, icon: const Icon(Icons.tune,color: Colors.black87,)),
-            IconButton(onPressed: (){}, icon: const Icon(Icons.info,color: Colors.black87,)),
-            IconButton(onPressed: (){}, icon: const Icon(Icons.folder,color: Colors.black87,)),
-            IconButton(onPressed: (){}, icon: const Icon(Icons.add,color: Colors.black87,)),
-           ],
-          ),
-         ),
-        ),
-       );
-      },
-     ),
-    ),
-   ],
-  ),
-      drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                image: DecorationImage(
-                  image: AssetImage("../imagens/logo.jpg"),
-                     fit: BoxFit.cover)
+            //Header com "ASSISTIDO"
+            Container(
+              height: 50,
+              color: const Color.fromARGB(255, 50, 39, 85),
+              child: const Row(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        "ASSISTIDOS",
+                        style: TextStyle(
+                          fontSize: 22,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              child: Text(''),
             ),
-            ListTile(
-              title: const Text('Menu'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
-                );
-              },
+            //Container da barra de buscar
+            Container(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.menu,
+                                  size: 30,
+                                )),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.filter_alt)),
+                          ],
+                        )
+                      ],
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(left: 20, right: 1),
+                      height: 40,
+                      width: 150,
+                      decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 50, 39, 85),
+                          borderRadius: BorderRadius.horizontal(
+                            left: Radius.circular(5),
+                            right: Radius.circular(0),
+                          )),
+                      child: const Align(
+                          alignment: AlignmentDirectional(-0.5, 0),
+                          child: Text(
+                            "N° do processo",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w200),
+                          )),
+                    ),
+                    Flexible(
+                      flex: 4,
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 5),
+                        height: 40,
+                        width: 240,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 0.8,
+                          ),
+                          borderRadius: const BorderRadius.horizontal(
+                            left: Radius.circular(0),
+                            right: Radius.circular(5),
+                          ),
+                        ),
+                        child: const TextField(
+                          decoration: InputDecoration(
+                            labelText: "    Search",
+                            suffixIcon: Icon(Icons.search),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const Flexible(flex: 6, child: SizedBox())
+                  ],
+                ),
+              ),
             ),
-            ListTile(
-              title: const Text('Permissões'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const PermissionsPage()),
-                );
-              },
+            // Mostrar Linha do caminho
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.only(
+                        left: 20, top: 5, right: 5, bottom: 5),
+                    height: 35,
+                    decoration: const BoxDecoration(
+                        border: BorderDirectional(
+                            top: BorderSide(width: 0.5),
+                            bottom: BorderSide(width: 0.5))),
+                    child: const Text(
+                      "Tudo > Ação = XXXXXXXX > Status = Ativo",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                )
+              ],
             ),
-            ListTile(
-              title: const Text('Relatórios'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ReportsPage()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Agenda'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SchedulePage()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Estatisticas'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const StatisticsPage()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Configurações'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SettingsPage()),
-                );
-              },
+            //Final Mostrar Linha do caminho
+            //ListView Inicio
+            Row(
+              children: [
+                Expanded(
+                  child: PaginatedDataTable(
+                    arrowHeadColor: Color.fromARGB(255, 38, 29, 68),
+                    showFirstLastButtons: true,
+                    source: _data,
+                    headingRowHeight: 40,
+                    columns: const [
+                      DataColumn(
+                          label: Expanded(
+                        child: Text("N° de processo",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 17)),
+                      )),
+                      DataColumn(
+                          label: Expanded(
+                        child: Text("Aberto em",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 17)),
+                      )),
+                      DataColumn(
+                          label: Expanded(
+                        child: Text("Ação",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 17)),
+                      )),
+                      DataColumn(
+                          label: Expanded(
+                        child: Text("Data distribuição",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 17)),
+                      )),
+                      DataColumn(
+                          label: Expanded(
+                        child: Text("Vara",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 17)),
+                      )),
+                      DataColumn(
+                          label: Expanded(
+                        child: Text("Fórum",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 17)),
+                      )),
+                      DataColumn(
+                          label: Expanded(
+                        child: Text("Status",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 17)),
+                      )),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ],
+        ),
+      ),
+      //Fim ListView
+      //Inicio Menu Lateral
+      drawer: Theme(
+        data: Theme.of(context).copyWith(
+          canvasColor: Color.fromARGB(255, 24, 18, 43),
+        ),
+        child: Drawer(
+          // Add a ListView to the drawer. This ensures the user can scroll
+          // through the options in the drawer if there isn't enough vertical
+          // space to fit everything.
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: [
+              Container(
+                height: 120,
+                width: 100,
+                margin: const EdgeInsets.all(25),
+                decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 24, 18, 43),
+                    image: DecorationImage(
+                        image: AssetImage("../imagens/gpro.png"),
+                        fit: BoxFit.fill)),
+                child: const Text(''),
+              ),
+              ListTile(
+                leading: const Icon(Icons.home, color: Colors.white),
+                title:
+                    const Text('Menu', style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomePage()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.menu, color: Colors.white),
+                title: const Text('Assistidos',
+                    style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.person, color: Colors.white),
+                title: const Text('Permissões',
+                    style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const PermissionsPage()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.download, color: Colors.white),
+                title: const Text('Relatórios',
+                    style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ReportsPage()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.calendar_month, color: Colors.white),
+                title:
+                    const Text('Agenda', style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SchedulePage()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.bar_chart, color: Colors.white),
+                title: const Text('Estatisticas',
+                    style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const StatisticsPage()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.settings, color: Colors.white),
+                title: const Text('Configurações',
+                    style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SettingsPage()),
+                  );
+                },
+              )
+            ],
+          ),
         ),
       ),
     );
   }
-
-  Future<void> _dialogBuilder(BuildContext context) {
- return showDialog<void>(
-  context: context,
-  builder: (BuildContext context) {
-   return AlertDialog(
-    scrollable: true,
-    title: const Text('Adicionar Assistido'),
-    content: Padding(
-     padding: const EdgeInsets.all(8.0),
-     child: Form(
-      key: _formKey,
-      child: Column(
-       children: [
-        TextFormField(
-         decoration: const InputDecoration(
-          labelText: "Nome",
-          icon: Icon(Icons.account_box),
-         ),
-        ),
-        TextFormField(
-         decoration: const InputDecoration(
-          labelText: "Processo",
-          icon: Icon(Icons.description),
-         ),
-        ),
-        TextFormField(
-         decoration: const InputDecoration(
-          labelText: "Triagem",
-          icon: Icon(Icons.find_in_page),
-         ),
-        ),
-       ],
-      ),
-     ),
-    ),
-    actions: <Widget>[
-     TextButton(
-      style: TextButton.styleFrom(
-       textStyle: Theme.of(context).textTheme.labelLarge,
-      ),
-      child: const Text('Fechar'),
-      onPressed: () {
-       Navigator.of(context).pop();
-      },
-     ),
-     TextButton(
-      style: TextButton.styleFrom(
-       textStyle: Theme.of(context).textTheme.labelLarge,
-      ),
-      child: const Text('Cadastrar'),
-      onPressed: () {
-       Navigator.of(context).pop();
-      },
-     ),
-    ],
-   );
-  },
- );
 }
 
+class MyData extends DataTableSource {
+  final List<Map<String, dynamic>> _data = List.generate(
+      200,
+      (index) => {
+            "numeroProcesso": 10230 + index,
+            "aberturaProcesso": "2023/09/20",
+            "acao": 'XXXXXXXXXXX',
+            "dataDistribuicao": "2023/11/05",
+            "vara": "XXXXXXXXXXX",
+            "forum": "XXXXXXXXXX",
+            "status": "Ativo",
+          });
+
+  @override
+  DataRow? getRow(int index) {
+    return DataRow(cells: [
+      DataCell(Center(
+          child: Text(
+        _data[index]['numeroProcesso'].toString(),
+      ))),
+      DataCell(Center(
+          child: Text(
+        _data[index]['aberturaProcesso'].toString(),
+      ))),
+      DataCell(Center(
+          child: Text(
+        _data[index]['acao'].toString(),
+      ))),
+      DataCell(Center(
+          child: Text(
+        _data[index]['dataDistribuicao'].toString(),
+      ))),
+      DataCell(Center(
+          child: Text(
+        _data[index]['vara'].toString(),
+      ))),
+      DataCell(Center(
+          child: Text(
+        _data[index]['forum'].toString(),
+      ))),
+      DataCell(Center(
+          child: Text(
+        _data[index]['status'].toString(),
+      ))),
+    ]);
+  }
+
+  @override
+  // TODO: implement isRowCountApproximate
+  bool get isRowCountApproximate => false;
+
+  @override
+  // TODO: implement rowCount
+  int get rowCount => _data.length;
+
+  @override
+  // TODO: implement selectedRowCount
+  int get selectedRowCount => 0;
 }
