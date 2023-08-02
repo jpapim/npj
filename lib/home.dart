@@ -95,10 +95,11 @@ class MyHomePage extends StatelessWidget {
                 width: 100,
                 margin: const EdgeInsets.all(25),
                 decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 24, 18, 43),
-                    image: DecorationImage(
-                        image: AssetImage("../imagens/gpro.png"),
-                        fit: BoxFit.fill)),
+                  color: Color.fromARGB(255, 24, 18, 43),
+                  image: DecorationImage(
+                      image: AssetImage("../imagens/gpro.png"),
+                      fit: BoxFit.fill),
+                ),
                 child: const Text(''),
               ),
               ListTile(
