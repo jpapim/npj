@@ -3,6 +3,23 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'login.dart';
 
+// Linhas de código abaixo para conseguir captar o FirebaseAuthException
+String parseFirebaseAuthExceptionMessage(
+    {String plugin = "auth", required String? input}) {
+  if (input == null) {
+    return "unknown";
+  }
+
+  String regexPattern = r'(?<=\(' + plugin + r'/)(.*?)(?=\)\.)';
+  RegExp regExp = RegExp(regexPattern);
+  Match? match = regExp.firstMatch(input);
+  if (match != null) {
+    return match.group(0)!;
+  }
+
+  return "unknown";
+}
+
 class ForgetPasswordPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
 
@@ -13,7 +30,34 @@ class ForgetPasswordPage extends StatelessWidget {
       await FirebaseAuth.instance.sendPasswordResetEmail(
         email: emailController.text,
       );
-    } catch (e) {
+      emailController.clear();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content:
+                Text('Um email foi enviado solicitando alteração de senha')),
+      );
+    } on FirebaseAuthException catch (e) { 
+      final code = parseFirebaseAuthExceptionMessage(input: e.message);
+
+      if (code.toString() == 'invalid-email') {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+                content: Text('Email informado é inválido')),
+          );
+      }
+      if (code.toString() == 'missing-email') {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+                content: Text('Email não foi informado')),
+          );
+      }
+      if (code.toString() == 'user-not-found') {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+                content: Text('Esse email não foi registrado')),
+          );
+      }
+    }catch (e) {
       print('Error: $e');
     }
   }
@@ -46,7 +90,7 @@ class ForgetPasswordPage extends StatelessWidget {
                             decoration: const BoxDecoration(
                                 image: DecorationImage(
                                     image: AssetImage(
-                                        "../imagens/logoGPROBranco.png"),
+                                        "../assets/imagens/logoGPROBranco.png"),
                                     fit: BoxFit.fill)),
                             child: const Text(''),
                           ),

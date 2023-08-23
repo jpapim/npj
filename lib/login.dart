@@ -32,19 +32,25 @@ class LoginPage extends StatelessWidget {
         email: emailController.text,
         password: passwordController.text,
       );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content:
+                Text('Login realizado com sucesso!')),
+      );
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const HomePage()),
       );
+      
     } on FirebaseAuthException catch (e) {
       final code = parseFirebaseAuthExceptionMessage(input: e.message);
 
-      if (code == 'wrong-password') {
+      if (code == 'wrong-password' || code == 'user-not-found') {
         ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Password Provided isnt valid')));
-      } else if (code == 'invalid-email' || code == 'user-not-found') {
+            const SnackBar(content: Text('Usuário ou senha inválidos')));
+      } else if (code == 'invalid-email') {
         ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text('User not found')));
+            .showSnackBar(const SnackBar(content: Text('Email inválido')));
       }
     } catch (e) {
       ScaffoldMessenger.of(context)
@@ -79,7 +85,7 @@ class LoginPage extends StatelessWidget {
                             decoration: const BoxDecoration(
                                 image: DecorationImage(
                                     image: AssetImage(
-                                        "../imagens/logoGPROBranco.png"),
+                                        "../assets/imagens/logoGPROBranco.png"),
                                     fit: BoxFit.fill)),
                             child: const Text(''),
                           ),

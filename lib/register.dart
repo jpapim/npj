@@ -1,8 +1,11 @@
+import 'dart:js_interop';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import 'login.dart';
+import 'package:flutter/services.dart';
+import 'package:npj/login.dart';
 
 // Linhas de código abaixo para conseguir captar o FirebaseAuthException
 String parseFirebaseAuthExceptionMessage(
@@ -30,34 +33,88 @@ class RegisterPage extends StatelessWidget {
   RegisterPage({super.key});
 
   void _registerUser(BuildContext context) async {
-    try {
-      UserCredential userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
+    if (nameController.isNull || nameController.text == "") {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('O campo nome não foi preenchido!')),
       );
-      // ignore: use_build_context_synchronously
+    } else if (passwordController.isNull || passwordController.text == "") {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('O campo senha não foi preenchido!')),
+      );
+    } else if (matriculaController.isNull || matriculaController.text == "") {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('O campo matrícula não foi preenchido!')),
+      );
+    } else if (matriculaController.text.length <= 8) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
             content:
-                Text('Registration Successful = ${userCredential.user!.uid}')),
+                Text('O campo matrícula não foi preenchido corretamente!')),
       );
-    } on FirebaseAuthException catch (e) {
-      final code = parseFirebaseAuthExceptionMessage(input: e.message);
-
-      if (code == 'weak-password') {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Password Provided is too weak')),
+    } else if (emailController.text.contains("projecao.edu.br") == false ||
+        emailController.text.length != 25) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text(
+                'O email informado é inválido, certifique-se de informar o email da instituição')),
+      );
+    } else {
+      try {
+        UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
         );
-      } else if (code == 'email-already-in-use') {
+
+        String userId = userCredential.user!.uid;
+        DateTime now = DateTime.now();
+        String dataFormatada = now.toLocal().toString();
+
+        await FirebaseFirestore.instance
+            .collection('Usuários')
+            .doc(userId)
+            .set({
+          'Id': userId,
+          'Nome': nameController.text,
+          'Email': emailController.text,
+          'Matrícula': matriculaController.text,
+          'Registro em': dataFormatada,
+        });
+
+        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Email Provided already Exists')),
+          SnackBar(
+              content: Text(
+                  'Registro realizado com sucesso! = ${userCredential.user!.uid}')),
+        );
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LoginPage()),
+        );
+      } on FirebaseAuthException catch (e) {
+        final code = parseFirebaseAuthExceptionMessage(input: e.message);
+
+        if (code == 'weak-password') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+                content: Text('Sua senha precisa de mais caracteres')),
+          );
+        } else if (code == 'email-already-in-use') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+                content: Text(
+                    'O email informado já está em uso, solicite a recuperação de senha caso necessário')),
+          );
+        } else if (code == 'invalid-email') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('O email informado não é válido')),
+          );
+        }
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.toString())),
         );
       }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString())),
-      );
     }
   }
 
@@ -84,7 +141,7 @@ class RegisterPage extends StatelessWidget {
                 width: 250,
                 margin: const EdgeInsets.only(bottom: 5),
                 child: Image.asset(
-                  '../imagens/logo.jpg',
+                  '../assets/imagens/logo.jpg',
                   //fit: BoxFit.cover,
                 ),
               ),
@@ -101,19 +158,6 @@ class RegisterPage extends StatelessWidget {
               SizedBox(
                 width: 400,
                 child: TextField(
-                  controller: emailController,
-                  decoration: const InputDecoration(
-                    hintText: 'E-mail',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.zero,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 5),
-              SizedBox(
-                width: 400,
-                child: TextField(
                   controller: nameController,
                   decoration: const InputDecoration(
                     hintText: 'Nome completo',
@@ -127,9 +171,9 @@ class RegisterPage extends StatelessWidget {
               SizedBox(
                 width: 400,
                 child: TextField(
-                  controller: matriculaController,
+                  controller: emailController,
                   decoration: const InputDecoration(
-                    hintText: 'Matrícula',
+                    hintText: 'E-mail',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.zero,
                     ),
@@ -148,6 +192,25 @@ class RegisterPage extends StatelessWidget {
                     ),
                   ),
                   obscureText: true,
+                ),
+              ),
+              const SizedBox(height: 5),
+              SizedBox(
+                width: 400,
+                child: TextField(
+                  controller: matriculaController,
+                  decoration: const InputDecoration(
+                    hintText: 'Matrícula',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.zero,
+                    ),
+                  ),
+                  maxLength: 9,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
                 ),
               ),
               const SizedBox(height: 15),
