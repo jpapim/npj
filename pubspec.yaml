@@ -39,6 +39,11 @@ dependencies:
   firebase_auth: ^4.6.3
   flutter_neat_and_clean_calendar: ^0.3.13+28
   table_calendar: ^3.0.9
+  firebase_database: ^10.0.1
+  cloud_firestore: ^4.8.2
+  firebase_ui_firestore: ^1.5.5
+  data_table_2: ^2.5.5
+
 
 dev_dependencies:
   flutter_test:

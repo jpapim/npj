@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:npj/pages/assisted_Process.dart';
 
 import 'pages/assisted.dart';
 import 'pages/permissions.dart';
@@ -124,7 +125,7 @@ class MyHomePage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const AssistedPage()),
+                        builder: (context) => const AssistedProcessPage()),
                   );
                 },
               ),
