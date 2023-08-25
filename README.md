@@ -1,16 +1,19 @@
-# npj
+# GProJuridico
 
-A new Flutter project. 
+### _Antes de atualizar o código confira se você está utilizando a última versão dos códigos atualizados:_<br>
+- Use o push commit para pegar as informações direto do github, ou então baixe o zip do código atualizado<br><br>
 
-## Getting Started
+### O que precisa para rodar o projeto:<br>
+- VSCode ou outra IDE<br>
+- Conta no firebase (Certifique-se de estar no BD)<br>
+- Para logar no sistema use 'firebase login' no terminal e entre com a sua conta que contém o BD<br>
+- NodeJS<br>
 
-This project is a starting point for a Flutter application.
+### Para rodar o projeto:<br>
+_Certifique-se de estar no diretório raiz do projeto: utilize o 'cd [CAMINHO]'._<br>
+Com o comando 'flutter run -d chrome' você irá iniciar uma página do chrome compilando o projeto.<br>
 
-A few resources to get you started if this is your first Flutter project:
+### Projeto já está no ar:<br>
+> _Clique no link abaixo para acessar o site oficial_ <br>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## _https://gprojuridico.web.app/#/_
