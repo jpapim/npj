@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:npj/home.dart';
 
-import 'permissions.dart';
+import 'assistidos.dart';
 import 'reports.dart';
 import 'schedule.dart';
 import 'settings.dart';
@@ -277,7 +277,7 @@ class _MyAssistedPageState extends State<MyAssistedPage> {
               ),
               ListTile(
                 leading: const Icon(Icons.menu, color: Colors.white),
-                title: const Text('Assistidos',
+                title: const Text('Processos',
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
                   // Update the state of the app
@@ -288,7 +288,7 @@ class _MyAssistedPageState extends State<MyAssistedPage> {
               ),
               ListTile(
                 leading: const Icon(Icons.person, color: Colors.white),
-                title: const Text('Permissões',
+                title: const Text('Assistidos',
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
                   // Update the state of the app
@@ -297,7 +297,7 @@ class _MyAssistedPageState extends State<MyAssistedPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const PermissionsPage()),
+                        builder: (context) => const AssistidosPage()),
                   );
                 },
               ),

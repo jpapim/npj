@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:npj/pages/assisted_Process.dart';
 
 import 'pages/assisted.dart';
-import 'pages/permissions.dart';
+import 'pages/assistidos.dart';
 import 'pages/reports.dart';
 import 'pages/schedule.dart';
 import 'pages/settings.dart';
@@ -116,7 +116,7 @@ class MyHomePage extends StatelessWidget {
               ),
               ListTile(
                 leading: const Icon(Icons.menu, color: Colors.white),
-                title: const Text('Assistidos',
+                title: const Text('Processos',
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
                   // Update the state of the app
@@ -131,7 +131,7 @@ class MyHomePage extends StatelessWidget {
               ),
               ListTile(
                 leading: const Icon(Icons.person, color: Colors.white),
-                title: const Text('Permissões',
+                title: const Text('Assistidos',
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
                   // Update the state of the app
@@ -140,7 +140,7 @@ class MyHomePage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const PermissionsPage()),
+                        builder: (context) => const AssistidosPage()),
                   );
                 },
               ),

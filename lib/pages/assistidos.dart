@@ -7,10 +7,10 @@ import 'schedule.dart';
 import 'settings.dart';
 import 'statistics.dart';
 
-void main() => runApp(const PermissionsPage());
+void main() => runApp(const AssistidosPage());
 
-class PermissionsPage extends StatelessWidget {
-  const PermissionsPage({super.key});
+class AssistidosPage extends StatelessWidget {
+  const AssistidosPage({super.key});
 
   static const appTitle = 'GPRO';
 
@@ -30,13 +30,13 @@ class PermissionsPage extends StatelessWidget {
           ),
         ),
       ),
-      home: MyPermissionsPage(title: appTitle),
+      home: MyAssistidosPage(title: appTitle),
     );
   }
 }
 
-class MyPermissionsPage extends StatelessWidget {
-  const MyPermissionsPage({super.key, required this.title});
+class MyAssistidosPage extends StatelessWidget {
+  const MyAssistidosPage({super.key, required this.title});
 
   final String title;
 
@@ -55,7 +55,7 @@ class MyPermissionsPage extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.center,
                     child: Text(
-                      "PERMISSÕES",
+                      "ASSISTIDOS",
                       style: TextStyle(
                         fontSize: 22,
                         color: Colors.white,
@@ -71,7 +71,7 @@ class MyPermissionsPage extends StatelessWidget {
               padding: EdgeInsets.only(
                 top: 200,
               ),
-              child: Text('PERMISSÕES'),
+              child: Text('ASSISTIDOS'),
             ),
           ),
         ],
@@ -115,7 +115,7 @@ class MyPermissionsPage extends StatelessWidget {
               ),
               ListTile(
                 leading: const Icon(Icons.menu, color: Colors.white),
-                title: const Text('Assistidos',
+                title: const Text('Processos',
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
                   // Update the state of the app
@@ -130,7 +130,7 @@ class MyPermissionsPage extends StatelessWidget {
               ),
               ListTile(
                 leading: const Icon(Icons.person, color: Colors.white),
-                title: const Text('Permissões',
+                title: const Text('Assistidos',
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
                   // Update the state of the app

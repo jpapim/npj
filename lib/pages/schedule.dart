@@ -11,7 +11,7 @@ import 'assisted.dart';
 import 'reports.dart';
 import 'settings.dart';
 import 'statistics.dart';
-import 'permissions.dart';
+import 'assistidos.dart';
 
 import '../utils.dart';
 
@@ -197,7 +197,7 @@ class _SchedulePageState extends State<SchedulePage> {
               ),
               ListTile(
                 leading: const Icon(Icons.menu, color: Colors.white),
-                title: const Text('Assistidos',
+                title: const Text('Processos',
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
                   // Update the state of the app
@@ -212,7 +212,7 @@ class _SchedulePageState extends State<SchedulePage> {
               ),
               ListTile(
                 leading: const Icon(Icons.person, color: Colors.white),
-                title: const Text('Permissões',
+                title: const Text('Assistidos',
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
                   // Update the state of the app
@@ -221,7 +221,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const PermissionsPage()),
+                        builder: (context) => const AssistidosPage()),
                   );
                 },
               ),

@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:npj/home.dart';
 import 'package:npj/pages/addProcess.dart';
 import 'package:npj/pages/edit_processo.dart';
-import 'package:npj/pages/permissions.dart';
+import 'package:npj/pages/assistidos.dart';
 import 'package:npj/pages/reports.dart';
 import 'package:npj/pages/schedule.dart';
 import 'package:npj/pages/settings.dart';
@@ -333,7 +333,7 @@ class _MyAssistedPageState extends State<MyAssistedPage> {
               ),
               ListTile(
                 leading: const Icon(Icons.menu, color: Colors.white),
-                title: const Text('Assistidos',
+                title: const Text('Processos',
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
                   // Update the state of the app
@@ -344,7 +344,7 @@ class _MyAssistedPageState extends State<MyAssistedPage> {
               ),
               ListTile(
                 leading: const Icon(Icons.person, color: Colors.white),
-                title: const Text('Permissões',
+                title: const Text('Assistidos',
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
                   // Update the state of the app
@@ -353,7 +353,7 @@ class _MyAssistedPageState extends State<MyAssistedPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const PermissionsPage()),
+                        builder: (context) => const AssistidosPage()),
                   );
                 },
               ),

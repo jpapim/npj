@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginPage(),
+        '/': (context) => HomePage(),
       }, //alterar aqui página inicial modo teste
     );
   }

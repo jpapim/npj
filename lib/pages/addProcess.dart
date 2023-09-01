@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:npj/home.dart';
 import 'package:npj/pages/assisted_Process.dart';
-import 'package:npj/pages/permissions.dart';
+import 'package:npj/pages/assistidos.dart';
 import 'package:npj/pages/schedule.dart';
 import 'package:npj/pages/settings.dart';
 import 'package:npj/pages/statistics.dart';
@@ -285,7 +285,7 @@ class _AddProcessoState extends State<AddProcesso> {
               ),
               ListTile(
                 leading: const Icon(Icons.menu, color: Colors.white),
-                title: const Text('Assistidos',
+                title: const Text('Processos',
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
                   // Update the state of the app
@@ -300,7 +300,7 @@ class _AddProcessoState extends State<AddProcesso> {
               ),
               ListTile(
                 leading: const Icon(Icons.person, color: Colors.white),
-                title: const Text('Permissões',
+                title: const Text('Assistidos',
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
                   // Update the state of the app
@@ -309,7 +309,7 @@ class _AddProcessoState extends State<AddProcesso> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const PermissionsPage()),
+                        builder: (context) => const AssistidosPage()),
                   );
                 },
               ),

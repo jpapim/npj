@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../home.dart';
 import 'assisted.dart';
-import 'permissions.dart';
+import 'assistidos.dart';
 import 'reports.dart';
 import 'schedule.dart';
 import 'settings.dart';
@@ -115,7 +115,7 @@ class MyStatisticsPage extends StatelessWidget {
               ),
               ListTile(
                 leading: const Icon(Icons.menu, color: Colors.white),
-                title: const Text('Assistidos',
+                title: const Text('Processos',
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
                   // Update the state of the app
@@ -130,7 +130,7 @@ class MyStatisticsPage extends StatelessWidget {
               ),
               ListTile(
                 leading: const Icon(Icons.person, color: Colors.white),
-                title: const Text('Permissões',
+                title: const Text('Assistidos',
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
                   // Update the state of the app
@@ -139,7 +139,7 @@ class MyStatisticsPage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const PermissionsPage()),
+                        builder: (context) => const AssistidosPage()),
                   );
                 },
               ),
