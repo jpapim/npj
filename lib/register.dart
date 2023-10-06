@@ -1,9 +1,7 @@
-import 'dart:js_interop';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:npj/login.dart';
 
@@ -33,28 +31,28 @@ class RegisterPage extends StatelessWidget {
   RegisterPage({super.key});
 
   void _registerUser(BuildContext context) async {
-    if (nameController.isNull || nameController.text == "") {
+    if (nameController.text == "") {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('O campo nome não foi preenchido!')),
+        const SnackBar(content: Text('O campo nome não foi preenchido!')),
       );
-    } else if (passwordController.isNull || passwordController.text == "") {
+    } else if (passwordController.text == "") {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('O campo senha não foi preenchido!')),
+        const SnackBar(content: Text('O campo senha não foi preenchido!')),
       );
-    } else if (matriculaController.isNull || matriculaController.text == "") {
+    } else if (matriculaController.text == "") {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('O campo matrícula não foi preenchido!')),
+        const SnackBar(content: Text('O campo matrícula não foi preenchido!')),
       );
     } else if (matriculaController.text.length <= 8) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
             content:
                 Text('O campo matrícula não foi preenchido corretamente!')),
       );
     } else if (emailController.text.contains("projecao.edu.br") == false ||
         emailController.text.length != 25) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
             content: Text(
                 'O email informado é inválido, certifique-se de informar o email da instituição')),
       );
