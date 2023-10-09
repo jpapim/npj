@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:npj/pages/assisted_Process.dart';
 
-import 'pages/assisted.dart';
 import 'pages/assistidos.dart';
 import 'pages/reports.dart';
 import 'pages/schedule.dart';
@@ -31,7 +30,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      home: MyHomePage(title: appTitle),
+      home: const MyHomePage(title: appTitle),
     );
   }
 }
@@ -81,7 +80,7 @@ class MyHomePage extends StatelessWidget {
 
       drawer: Theme(
         data: Theme.of(context).copyWith(
-          canvasColor: Color.fromARGB(255, 24, 18, 43),
+          canvasColor: const Color.fromARGB(255, 24, 18, 43),
         ),
         child: Drawer(
           // Add a ListView to the drawer. This ensures the user can scroll

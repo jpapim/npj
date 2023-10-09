@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:npj/home.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import 'assisted.dart';
+import 'process.dart';
 import 'reports.dart';
 import 'settings.dart';
 import 'statistics.dart';
