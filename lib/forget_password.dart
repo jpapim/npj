@@ -32,7 +32,7 @@ class ForgetPasswordPage extends StatelessWidget {
       );
       emailController.clear();
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
             content:
                 Text('Um email foi enviado solicitando alteração de senha')),
       );
@@ -58,7 +58,7 @@ class ForgetPasswordPage extends StatelessWidget {
           );
       }
     }catch (e) {
-      print('Error: $e');
+      // print('Error: $e');
     }
   }
 
@@ -173,34 +173,32 @@ class ForgetPasswordPage extends StatelessWidget {
               ),
             ),
             // Fim formulario de login
-            Container(
-              child: Column(
-                children: [
-                  Container(
-                    height: 70,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(height: 80),
-                        Text("Sobre"),
-                        SizedBox(width: 25),
-                        Text("Privacidade"),
-                        SizedBox(width: 25),
-                        Text("Termo de uso"),
-                      ],
-                    ),
+            Column(
+              children: [
+                const SizedBox(
+                  height: 70,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(height: 80),
+                      Text("Sobre"),
+                      SizedBox(width: 25),
+                      Text("Privacidade"),
+                      SizedBox(width: 25),
+                      Text("Termo de uso"),
+                    ],
                   ),
-                  Container(
-                    margin: EdgeInsets.only(bottom: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("© 2023 GPRO"),
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 20),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("© 2023 GPRO"),
+                    ],
+                  ),
+                )
+              ],
             )
           ],
         ),

@@ -189,7 +189,7 @@ class _EditarProcessoState extends State<EditarProcesso> {
                           alignment: Alignment.center,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: Color.fromARGB(255, 103, 22, 170),
+                              backgroundColor: const Color.fromARGB(255, 103, 22, 170),
                               textStyle: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
@@ -210,7 +210,7 @@ class _EditarProcessoState extends State<EditarProcesso> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            AssistedProcessPage()));
+                                            const AssistedProcessPage()));
                               });
                             },
                             child: const Text('Modificar'),
@@ -230,7 +230,7 @@ class _EditarProcessoState extends State<EditarProcesso> {
       //Inicio Menu Lateral
       drawer: Theme(
         data: Theme.of(context).copyWith(
-          canvasColor: Color.fromARGB(255, 24, 18, 43),
+          canvasColor: const Color.fromARGB(255, 24, 18, 43),
         ),
         child: Drawer(
           // Add a ListView to the drawer. This ensures the user can scroll

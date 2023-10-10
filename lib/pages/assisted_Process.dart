@@ -2,7 +2,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:npj/home.dart';
-import 'package:npj/pages/addProcess.dart';
+import 'package:npj/pages/add_process.dart';
 import 'package:npj/pages/edit_processo.dart';
 import 'package:npj/pages/assistidos.dart';
 import 'package:npj/pages/reports.dart';
@@ -99,7 +99,7 @@ class _MyAssistedPageState extends State<MyAssistedPage> {
           await Navigator.pushNamed(context, '/addProcess');
           setState(() {});
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       body: Column(
         children: [
@@ -125,7 +125,7 @@ class _MyAssistedPageState extends State<MyAssistedPage> {
             ),
           ),
           //Container da barra de buscar
-          Container(
+          SizedBox(
             height: 60,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
