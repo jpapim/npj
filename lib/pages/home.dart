@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:npj/pages/assisted_Process.dart';
 
-import 'pages/assistidos.dart';
-import 'pages/reports.dart';
-import 'pages/schedule.dart';
-import 'pages/settings.dart';
-import 'pages/statistics.dart';
+import 'assistidos.dart';
+import 'reports.dart';
+import 'schedule.dart';
+import 'settings.dart';
+import 'statistics.dart';
 
 void main() => runApp(const HomePage());
 

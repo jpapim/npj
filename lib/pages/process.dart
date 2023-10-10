@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:npj/home.dart';
+import 'package:npj/pages/home.dart';
 
 import 'assistidos.dart';
 import 'reports.dart';

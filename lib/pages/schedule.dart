@@ -4,7 +4,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:npj/home.dart';
+import 'package:npj/pages/home.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import 'process.dart';
@@ -13,7 +13,7 @@ import 'settings.dart';
 import 'statistics.dart';
 import 'assistidos.dart';
 
-import '../utils.dart';
+import '../components/utils.dart';
 
 void main() => runApp(const SchedulePage());
 

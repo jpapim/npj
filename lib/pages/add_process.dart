@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:npj/home.dart';
+import 'package:npj/pages/home.dart';
 import 'package:npj/pages/assisted_Process.dart';
 import 'package:npj/pages/assistidos.dart';
 import 'package:npj/pages/schedule.dart';

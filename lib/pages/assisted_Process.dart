@@ -1,7 +1,7 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:npj/home.dart';
+import 'package:npj/pages/home.dart';
 import 'package:npj/pages/add_process.dart';
 import 'package:npj/pages/edit_processo.dart';
 import 'package:npj/pages/assistidos.dart';
