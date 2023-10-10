@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:npj/components/side_menu.dart';
 
-void main() => runApp(const StatisticsPage());
+void main() => runApp(const AssistidosPage());
 
-class StatisticsPage extends StatelessWidget {
-  const StatisticsPage({super.key});
+class AssistidosPage extends StatelessWidget {
+  const AssistidosPage({super.key});
 
   static const appTitle = 'GPRO';
 
@@ -24,13 +24,13 @@ class StatisticsPage extends StatelessWidget {
           ),
         ),
       ),
-      home: const MyStatisticsPage(title: appTitle),
+      home: const MyAssistidosPage(title: appTitle),
     );
   }
 }
 
-class MyStatisticsPage extends StatelessWidget {
-  const MyStatisticsPage({super.key, required this.title});
+class MyAssistidosPage extends StatelessWidget {
+  const MyAssistidosPage({super.key, required this.title});
 
   final String title;
 
@@ -49,7 +49,7 @@ class MyStatisticsPage extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.center,
                     child: Text(
-                      "ESTATÍSTICAS",
+                      "ASSISTIDOS",
                       style: TextStyle(
                         fontSize: 22,
                         color: Colors.white,
@@ -65,7 +65,7 @@ class MyStatisticsPage extends StatelessWidget {
               padding: EdgeInsets.only(
                 top: 200,
               ),
-              child: Text('Estatísticas'),
+              child: Text('ASSISTIDOS'),
             ),
           ),
         ],

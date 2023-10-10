@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:npj/pages/assisted_Process.dart';
+import 'package:npj/pages/assisted_process.dart';
 
-import 'assistidos.dart';
+import 'assisted_clients.dart';
 import 'reports.dart';
 import 'schedule.dart';
 import 'settings.dart';

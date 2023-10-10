@@ -4,14 +4,8 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:npj/pages/home.dart';
+import 'package:npj/components/side_menu.dart';
 import 'package:table_calendar/table_calendar.dart';
-
-import 'process.dart';
-import 'reports.dart';
-import 'settings.dart';
-import 'statistics.dart';
-import 'assistidos.dart';
 
 import '../components/utils.dart';
 
@@ -21,7 +15,7 @@ class SchedulePage extends StatefulWidget {
   const SchedulePage({super.key});
 
   @override
-  _SchedulePageState createState() => _SchedulePageState();
+  State<SchedulePage> createState() => _SchedulePageState();
 }
 
 class _SchedulePageState extends State<SchedulePage> {
@@ -73,7 +67,7 @@ class _SchedulePageState extends State<SchedulePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('GPRO'),
+        title: const Text('GPRO'),
       ),
       body: Column(
         children: [
@@ -121,7 +115,7 @@ class _SchedulePageState extends State<SchedulePage> {
             },
           ),
           ElevatedButton(
-            child: Text('Clear selection'),
+            child: const Text('Clear selection'),
             onPressed: () {
               setState(() {
                 _selectedDays.clear();
@@ -147,7 +141,7 @@ class _SchedulePageState extends State<SchedulePage> {
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: ListTile(
-                        onTap: () => print('${value[index]}'),
+                        onTap: () => {},// print('${value[index]}'),
                         title: Text('${value[index]}'),
                       ),
                     );
@@ -158,133 +152,7 @@ class _SchedulePageState extends State<SchedulePage> {
           ),
         ],
       ),
-      drawer: Theme(
-        data: Theme.of(context).copyWith(
-          canvasColor: Color.fromARGB(255, 24, 18, 43),
-        ),
-        child: Drawer(
-          // Add a ListView to the drawer. This ensures the user can scroll
-          // through the options in the drawer if there isn't enough vertical
-          // space to fit everything.
-          child: ListView(
-            // Important: Remove any padding from the ListView.
-            padding: EdgeInsets.zero,
-            children: [
-              Container(
-                height: 120,
-                width: 100,
-                margin: const EdgeInsets.all(25),
-                decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 24, 18, 43),
-                    image: DecorationImage(
-                        image: AssetImage("../assets/imagens/gpro.png"),
-                        fit: BoxFit.fill)),
-                child: const Text(''),
-              ),
-              ListTile(
-                leading: const Icon(Icons.home, color: Colors.white),
-                title:
-                    const Text('Menu', style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomePage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.menu, color: Colors.white),
-                title: const Text('Processos',
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AssistedPage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.person, color: Colors.white),
-                title: const Text('Assistidos',
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AssistidosPage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.download, color: Colors.white),
-                title: const Text('Relatórios',
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ReportsPage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.calendar_month, color: Colors.white),
-                title:
-                    const Text('Agenda', style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.bar_chart, color: Colors.white),
-                title: const Text('Estatisticas',
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const StatisticsPage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.settings, color: Colors.white),
-                title: const Text('Configurações',
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SettingsPage()),
-                  );
-                },
-              )
-            ],
-          ),
-        ),
-      ),
+      drawer: const SideMenu(),
     );
   }
 }
