@@ -85,12 +85,13 @@ class LoginPage extends StatelessWidget {
                             decoration: const BoxDecoration(
                                 image: DecorationImage(
                                     image: AssetImage(
-                                        "../assets/imagens/logoGPROBranco.png"),
+                                        "assets/images/logoGPROBranco.png"),
                                     fit: BoxFit.fill)),
                             child: const Text(''),
                           ),
                           const SizedBox(height: 20),
                           TextField(
+                            keyboardType: TextInputType.emailAddress,
                             controller: emailController,
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),

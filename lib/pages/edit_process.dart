@@ -66,6 +66,7 @@ class _EditarProcessoState extends State<EditarProcesso> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          keyboardType: TextInputType.number,
                           controller: numeroProcesso,
                           style: const TextStyle(fontSize: 22),
                           decoration: const InputDecoration(
@@ -83,6 +84,7 @@ class _EditarProcessoState extends State<EditarProcesso> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          keyboardType: TextInputType.datetime,
                           controller: aberturaProcesso,
                           style: const TextStyle(fontSize: 22),
                           decoration: const InputDecoration(
@@ -117,6 +119,7 @@ class _EditarProcessoState extends State<EditarProcesso> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          keyboardType: TextInputType.datetime,
                           controller: dataDistricuicao,
                           style: const TextStyle(fontSize: 22),
                           decoration: const InputDecoration(

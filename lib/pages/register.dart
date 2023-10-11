@@ -169,6 +169,7 @@ class RegisterPage extends StatelessWidget {
               SizedBox(
                 width: 400,
                 child: TextField(
+                  keyboardType: TextInputType.emailAddress,
                   controller: emailController,
                   decoration: const InputDecoration(
                     hintText: 'E-mail',
