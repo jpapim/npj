@@ -139,7 +139,7 @@ class RegisterPage extends StatelessWidget {
                 width: 250,
                 margin: const EdgeInsets.only(bottom: 5),
                 child: Image.asset(
-                  '../assets/imagens/logo.jpg',
+                  'assets/images/logo.jpg',
                   //fit: BoxFit.cover,
                 ),
               ),
