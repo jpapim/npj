@@ -121,7 +121,7 @@ class _MyAssistedPageState extends State<MyAssistedPage> {
           ),
           //Container da barra de buscar
           SizedBox(
-            height: 60,
+            height: 64,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(

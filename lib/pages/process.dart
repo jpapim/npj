@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:npj/components/side_menu.dart';
 
-
-class AssistedPage extends StatelessWidget {
-  const AssistedPage({Key? key});
+// versão antiga da página de processos!!!!!!!
+class ProcessPage extends StatelessWidget {
+  const ProcessPage({super.key});
 
   static const appTitle = 'GProJuridico';
 
@@ -23,21 +23,21 @@ class AssistedPage extends StatelessWidget {
           ),
         ),
       ),
-      home: const MyAssistedPage(title: appTitle),
+      home: const MyProcessPage(title: appTitle),
     );
   }
 }
 
-class MyAssistedPage extends StatefulWidget {
-  const MyAssistedPage({Key? key, required this.title}) : super(key: key);
+class MyProcessPage extends StatefulWidget {
+  const MyProcessPage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<MyAssistedPage> createState() => _MyAssistedPageState();
+  State<MyProcessPage> createState() => _MyProcessPageState();
 }
 
-class _MyAssistedPageState extends State<MyAssistedPage> {
+class _MyProcessPageState extends State<MyProcessPage> {
   final DataTableSource _data = MyData();
 
   @override
@@ -47,7 +47,7 @@ class _MyAssistedPageState extends State<MyAssistedPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            //Header com "ASSISTIDO"
+            //Header com "PROCESSOS"
             Container(
               height: 50,
               color: const Color.fromARGB(255, 50, 39, 85),
@@ -297,5 +297,3 @@ class MyData extends DataTableSource {
   // TODO: implement selectedRowCount
   int get selectedRowCount => 0;
 }
-
-

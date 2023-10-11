@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:npj/pages/assisted_clients.dart';
+import 'package:npj/pages/assisted_process.dart';
 import 'package:npj/pages/home.dart';
 import 'package:npj/pages/reports.dart';
 import 'package:npj/pages/schedule.dart';
@@ -30,13 +31,13 @@ class SideMenu extends StatelessWidget {
               decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 24, 18, 43),
                   image: DecorationImage(
-                      image: AssetImage("../assets/imagens/gpro.png"),
+                      image: AssetImage("assets/images/gpro.png"),
                       fit: BoxFit.fill)),
               child: const Text(''),
             ),
             ListTile(
               leading: const Icon(Icons.home, color: Colors.white),
-              title: const Text('Menu', style: TextStyle(color: Colors.white)),
+              title: const Text('Home', style: TextStyle(color: Colors.white)),
               onTap: () {
                 // Update the state of the app
                 // ...
@@ -52,7 +53,11 @@ class SideMenu extends StatelessWidget {
               title: const Text('Processos',
                   style: TextStyle(color: Colors.white)),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AssistedProcessPage()),
+                );
               },
             ),
             ListTile(
