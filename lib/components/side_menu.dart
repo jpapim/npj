@@ -39,9 +39,6 @@ class SideMenu extends StatelessWidget {
               leading: const Icon(Icons.home, color: Colors.white),
               title: const Text('Home', style: TextStyle(color: Colors.white)),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const HomePage()),
@@ -49,7 +46,7 @@ class SideMenu extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.menu, color: Colors.white),
+              leading: const Icon(Icons.newspaper, color: Colors.white),
               title: const Text('Processos',
                   style: TextStyle(color: Colors.white)),
               onTap: () {

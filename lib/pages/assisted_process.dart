@@ -1,6 +1,7 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:npj/components/header_theme.dart';
 import 'package:npj/components/side_menu.dart';
 import 'package:npj/pages/add_process.dart';
 import 'package:npj/pages/edit_process.dart';
@@ -15,18 +16,7 @@ class AssistedProcessPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: appTitle,
-      theme: ThemeData(
-        colorSchemeSeed: const Color.fromARGB(255, 15, 12, 29),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromARGB(255, 24, 18, 43),
-          centerTitle: true,
-          titleTextStyle: TextStyle(
-            fontSize: 44,
-            fontFamily: "Built-SemiBold",
-            color: Colors.white,
-          ),
-        ),
-      ),
+      theme: HeaderTheme.getAppTheme(),
       initialRoute: '/',
       routes: {
         '/addProcess': (context) => const AddProcessoPage(),

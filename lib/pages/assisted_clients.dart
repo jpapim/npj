@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:npj/components/side_menu.dart';
 
+import '../components/header_theme.dart';
+
 void main() => runApp(const AssistidosPage());
 
 class AssistidosPage extends StatelessWidget {
@@ -12,18 +14,7 @@ class AssistidosPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: appTitle,
-      theme: ThemeData(
-        colorSchemeSeed: const Color.fromARGB(255, 15, 12, 29),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromARGB(255, 24, 18, 43),
-          centerTitle: true,
-          titleTextStyle: TextStyle(
-            fontSize: 44,
-            fontFamily: "Built-SemiBold",
-            color: Colors.white,
-          ),
-        ),
-      ),
+      theme: HeaderTheme.getAppTheme(),
       home: const MyAssistidosPage(title: appTitle),
     );
   }

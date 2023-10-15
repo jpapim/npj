@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:npj/components/header_theme.dart';
 import 'package:npj/pages/home.dart';
 import 'services/firebase_options.dart';
 
@@ -21,18 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'GPRO',
-      theme: ThemeData(
-        colorSchemeSeed: const Color.fromARGB(255, 15, 12, 29),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromARGB(255, 24, 18, 43),
-          centerTitle: true,
-          titleTextStyle: TextStyle(
-            fontSize: 44,
-            fontFamily: "Built-SemiBold",
-            color: Colors.white,
-          ),
-        ),
-      ),
+      theme: HeaderTheme.getAppTheme(),
       initialRoute: '/',
       routes: {
         '/': (context) => const HomePage(),
