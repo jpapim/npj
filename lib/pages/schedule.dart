@@ -5,6 +5,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:npj/components/side_menu.dart';
+import 'package:npj/components/user_menu.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../components/utils.dart';
@@ -66,6 +67,12 @@ class _SchedulePageState extends State<SchedulePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('GPRO'),
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 16.0),
+            child: UserPopupMenu(),
+          ),
+        ],
       ),
       body: Column(
         children: [

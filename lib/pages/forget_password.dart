@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'login.dart';
-
 // Linhas de código abaixo para conseguir captar o FirebaseAuthException
 String parseFirebaseAuthExceptionMessage(
     {String plugin = "auth", required String? input}) {
@@ -154,11 +152,7 @@ class ForgetPasswordPage extends StatelessWidget {
                         const Text("Já tem uma conta?"),
                         TextButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoginPage()),
-                            );
+                            Navigator.pushReplacementNamed(context, '/login');
                           },
                           child: const Text("Voltar ao login"),
                         ),

@@ -2,6 +2,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:npj/components/side_menu.dart';
+import 'package:npj/components/user_menu.dart';
 import 'package:npj/services/firebase_service.dart';
 
 class AssistedProcessPage extends StatefulWidget {
@@ -53,7 +54,15 @@ class _AssistedProcessPageState extends State<AssistedProcessPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("GPRO")),
+      appBar: AppBar(
+        title: const Text("GPRO"),
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 16.0),
+            child: UserPopupMenu(),
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await Navigator.pushNamed(context, '/addProcess');

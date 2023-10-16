@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:npj/components/side_menu.dart';
+import 'package:npj/components/user_menu.dart';
 
 class ReportsPage extends StatelessWidget {
   const ReportsPage({super.key});
@@ -7,7 +8,15 @@ class ReportsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("GPRO")),
+      appBar: AppBar(
+        title: const Text("GPRO"),
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 16.0),
+            child: UserPopupMenu(),
+          ),
+        ],
+      ),
       body: Column(
         children: [
           Container(

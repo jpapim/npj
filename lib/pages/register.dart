@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:npj/pages/login.dart';
 
 // Linhas de código abaixo para conseguir captar o FirebaseAuthException
 String parseFirebaseAuthExceptionMessage(
@@ -79,16 +78,12 @@ class RegisterPage extends StatelessWidget {
           'Registro em': dataFormatada,
         });
 
-        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
               content: Text(
                   'Registro realizado com sucesso! = ${userCredential.user!.uid}')),
         );
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => LoginPage()),
-        );
+        Navigator.pushReplacementNamed(context, '/login');
       } on FirebaseAuthException catch (e) {
         final code = parseFirebaseAuthExceptionMessage(input: e.message);
 
@@ -257,11 +252,7 @@ class RegisterPage extends StatelessWidget {
                       ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginPage()),
-                          );
+                          Navigator.pushReplacementNamed(context, '/login');
                         },
                     ),
                   ],

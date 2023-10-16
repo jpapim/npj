@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'register.dart';
-import 'forget_password.dart';
-
 //Linhas de código abaixo para conseguir captar o FirebaseAuthException
 String parseFirebaseAuthExceptionMessage(
     {String plugin = "auth", required String? input}) {
@@ -22,6 +19,8 @@ String parseFirebaseAuthExceptionMessage(
 }
 
 class LoginPage extends StatelessWidget {
+  LoginPage({super.key});
+
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -125,11 +124,8 @@ class LoginPage extends StatelessWidget {
                           const SizedBox(height: 20),
                           TextButton(
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ForgetPasswordPage()),
-                              );
+                              Navigator.pushReplacementNamed(
+                                  context, '/forgetPage');
                             },
                             child: const Text(
                               'Esqueceu a senha?',
@@ -154,11 +150,8 @@ class LoginPage extends StatelessWidget {
                         const Text("Não tem uma conta?"),
                         TextButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RegisterPage()),
-                            );
+                            Navigator.pushReplacementNamed(
+                                context, '/register');
                           },
                           child: const Text("Cadastre-se"),
                         ),

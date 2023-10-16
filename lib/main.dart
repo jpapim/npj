@@ -4,7 +4,10 @@ import 'package:npj/pages/add_process.dart';
 import 'package:npj/pages/assisted_clients.dart';
 import 'package:npj/pages/assisted_process.dart';
 import 'package:npj/pages/edit_process.dart';
+import 'package:npj/pages/forget_password.dart';
 import 'package:npj/pages/home.dart';
+import 'package:npj/pages/login.dart';
+import 'package:npj/pages/register.dart';
 import 'package:npj/pages/reports.dart';
 import 'package:npj/pages/schedule.dart';
 import 'package:npj/pages/settings.dart';
@@ -40,7 +43,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const HomePage(), // altere aqui caso deseje utilizar uma página sem logar ou fora da nav
+        '/': (context) => const HomePage(), // altere aqui caso deseje utilizar uma página direto
         '/process': (context) => const AssistedProcessPage(),
         '/addProcess': (context) => const AddProcessPage(),
         '/editProcess': (context) => const EditProcessPage(),
@@ -49,7 +52,10 @@ class MyApp extends StatelessWidget {
         '/schedule': (context) => const SchedulePage(),
         '/reports': (context) => const ReportsPage(),
         '/settings': (context) => const SettingsPage(),
-        // TODO: adicionar navegação de tudo relacionado aos usuários
+        // usuario:
+        '/login': (context) => LoginPage(),
+        '/register': (context) => RegisterPage(),
+        '/forgetPage': (context) => ForgetPasswordPage(),
       }
     );
   }
