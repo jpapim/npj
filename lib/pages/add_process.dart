@@ -1,35 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:npj/components/header_theme.dart';
 import 'package:npj/components/side_menu.dart';
-import 'package:npj/pages/assisted_process.dart';
 import 'package:npj/services/firebase_service.dart';
 
-
-class AddProcessoPage extends StatelessWidget {
-  const AddProcessoPage({super.key});
-
-  static const appTitle = 'GProJuridico';
+class AddProcessPage extends StatefulWidget {
+  const AddProcessPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: appTitle,
-      theme: HeaderTheme.getAppTheme(),
-      home: const AddProcesso(title: appTitle),
-    );
-  }
+  State<AddProcessPage> createState() => _AddProcessPageState();
 }
 
-class AddProcesso extends StatefulWidget {
-  const AddProcesso({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<AddProcesso> createState() => _AddProcessoState();
-}
-
-class _AddProcessoState extends State<AddProcesso> {
+class _AddProcessPageState extends State<AddProcessPage> {
   TextEditingController numeroProcesso = TextEditingController();
   TextEditingController aberturaProcesso = TextEditingController();
   TextEditingController acao = TextEditingController();
@@ -212,11 +192,7 @@ class _AddProcessoState extends State<AddProcesso> {
                                       statusProcesso.text)
                                   .then((value) {
                                 // print("Cadastrador");
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const AssistedProcessPage()));
+                                Navigator.pushReplacementNamed(context, ("/process"));
                               });
                             },
                             child: const Text('Cadastrar'),

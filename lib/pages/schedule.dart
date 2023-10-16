@@ -9,8 +9,6 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../components/utils.dart';
 
-void main() => runApp(const SchedulePage());
-
 class SchedulePage extends StatefulWidget {
   const SchedulePage({super.key});
 
@@ -141,7 +139,7 @@ class _SchedulePageState extends State<SchedulePage> {
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: ListTile(
-                        onTap: () => {},// print('${value[index]}'),
+                        onTap: () => {}, // print('${value[index]}'),
                         title: Text('${value[index]}'),
                       ),
                     );

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:npj/components/side_menu.dart';
-import 'package:npj/pages/assisted_process.dart';
 import 'package:npj/services/firebase_service.dart';
 
-class EditarProcesso extends StatefulWidget {
-  const EditarProcesso({super.key});
+class EditProcessPage extends StatefulWidget {
+  const EditProcessPage({super.key});
 
   @override
-  State<EditarProcesso> createState() => _EditarProcessoState();
+  State<EditProcessPage> createState() => _EditProcessPageState();
 }
 
-class _EditarProcessoState extends State<EditarProcesso> {
+class _EditProcessPageState extends State<EditProcessPage> {
   TextEditingController idProcesso = TextEditingController();
   TextEditingController numeroProcesso = TextEditingController();
   TextEditingController aberturaProcesso = TextEditingController();
@@ -187,7 +186,8 @@ class _EditarProcessoState extends State<EditarProcesso> {
                           alignment: Alignment.center,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color.fromARGB(255, 103, 22, 170),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 103, 22, 170),
                               textStyle: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
@@ -204,11 +204,8 @@ class _EditarProcessoState extends State<EditarProcesso> {
                                       forumProcesso.text,
                                       statusProcesso.text)
                                   .then((value) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const AssistedProcessPage()));
+                                Navigator.pushReplacementNamed(
+                                    context, ('/process'));
                               });
                             },
                             child: const Text('Modificar'),

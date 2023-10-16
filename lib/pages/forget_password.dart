@@ -36,28 +36,25 @@ class ForgetPasswordPage extends StatelessWidget {
             content:
                 Text('Um email foi enviado solicitando alteração de senha')),
       );
-    } on FirebaseAuthException catch (e) { 
+    } on FirebaseAuthException catch (e) {
       final code = parseFirebaseAuthExceptionMessage(input: e.message);
 
       if (code.toString() == 'invalid-email') {
         ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-                content: Text('Email informado é inválido')),
-          );
+          const SnackBar(content: Text('Email informado é inválido')),
+        );
       }
       if (code.toString() == 'missing-email') {
         ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-                content: Text('Email não foi informado')),
-          );
+          const SnackBar(content: Text('Email não foi informado')),
+        );
       }
       if (code.toString() == 'user-not-found') {
         ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-                content: Text('Esse email não foi registrado')),
-          );
+          const SnackBar(content: Text('Esse email não foi registrado')),
+        );
       }
-    }catch (e) {
+    } catch (e) {
       // print('Error: $e');
     }
   }
@@ -69,8 +66,8 @@ class ForgetPasswordPage extends StatelessWidget {
         child: Column(
           children: [
             Align(
-              alignment: const AlignmentDirectional(0,
-                  0), //PROTÓTIPO ==  alignment: const AlignmentDirectional(0.6, -1),
+              alignment: const AlignmentDirectional(0, 0),
+              //PROTÓTIPO ==  alignment: const AlignmentDirectional(0.6, -1),
               child: Column(
                 children: [
                   const SizedBox(height: 25),

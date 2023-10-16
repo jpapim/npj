@@ -1,33 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:npj/components/header_theme.dart';
 import 'package:npj/components/side_menu.dart';
-
-void main() => runApp(const StatisticsPage());
 
 class StatisticsPage extends StatelessWidget {
   const StatisticsPage({super.key});
 
-  static const appTitle = 'GPRO';
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: appTitle,
-      theme: HeaderTheme.getAppTheme(),
-      home: const MyStatisticsPage(title: appTitle),
-    );
-  }
-}
-
-class MyStatisticsPage extends StatelessWidget {
-  const MyStatisticsPage({super.key, required this.title});
-
-  final String title;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(title: const Text("GPRO")),
       body: Column(
         children: [
           Container(

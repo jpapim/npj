@@ -1,42 +1,17 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:npj/components/header_theme.dart';
 import 'package:npj/components/side_menu.dart';
-import 'package:npj/pages/add_process.dart';
-import 'package:npj/pages/edit_process.dart';
 import 'package:npj/services/firebase_service.dart';
 
-class AssistedProcessPage extends StatelessWidget {
-  const AssistedProcessPage({super.key});
-
-  static const appTitle = 'GProJuridico';
+class AssistedProcessPage extends StatefulWidget {
+  const AssistedProcessPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: appTitle,
-      theme: HeaderTheme.getAppTheme(),
-      initialRoute: '/',
-      routes: {
-        '/addProcess': (context) => const AddProcessoPage(),
-        '/editProcess': (context) => const EditarProcesso(),
-      },
-      home: const MyAssistedPage(title: appTitle),
-    );
-  }
+  State<AssistedProcessPage> createState() => _AssistedProcessPageState();
 }
 
-class MyAssistedPage extends StatefulWidget {
-  const MyAssistedPage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyAssistedPage> createState() => _MyAssistedPageState();
-}
-
-class _MyAssistedPageState extends State<MyAssistedPage> {
+class _AssistedProcessPageState extends State<AssistedProcessPage> {
   List<Data> allData = [];
   List<Data> filteredData = [];
 
@@ -315,7 +290,7 @@ class MyData2 extends DataTableSource {
       DataCell(Center(
           child: ElevatedButton(
               onPressed: () async {
-                await Navigator.pushNamed(
+                await Navigator.pushReplacementNamed(
                   context,
                   "/editProcess",
                   arguments: {
@@ -385,10 +360,7 @@ Future openDialog(
                   onPressed: () {
                     deleteProcesso(idProcesso);
 
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const AssistedProcessPage()));
+                    Navigator.pushReplacementNamed(context, ('/process'));
                   },
                   child: const Text("Sim, tenho certeza"),
                 ),

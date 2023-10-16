@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:npj/components/header_theme.dart';
+import 'package:npj/pages/add_process.dart';
+import 'package:npj/pages/assisted_clients.dart';
+import 'package:npj/pages/assisted_process.dart';
+import 'package:npj/pages/edit_process.dart';
 import 'package:npj/pages/home.dart';
+import 'package:npj/pages/reports.dart';
+import 'package:npj/pages/schedule.dart';
+import 'package:npj/pages/settings.dart';
+import 'package:npj/pages/statistics.dart';
 import 'services/firebase_options.dart';
 
-//import 'home.dart';
-//import 'register.dart';
-
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -22,11 +26,31 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'GPRO',
-      theme: HeaderTheme.getAppTheme(),
+      theme: ThemeData(
+        colorSchemeSeed: const Color.fromARGB(255, 15, 12, 29),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromARGB(255, 24, 18, 43),
+          centerTitle: true,
+          titleTextStyle: TextStyle(
+            fontSize: 44,
+            fontFamily: "Built-SemiBold",
+            color: Colors.white,
+          ),
+        ),
+      ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const HomePage(),
-      }, //alterar aqui página inicial modo teste
+        '/': (context) => const HomePage(), // altere aqui caso deseje utilizar uma página sem logar ou fora da nav
+        '/process': (context) => const AssistedProcessPage(),
+        '/addProcess': (context) => const AddProcessPage(),
+        '/editProcess': (context) => const EditProcessPage(),
+        '/clients': (context) => const AssistedClientsPage(),
+        '/statistics': (context) => const StatisticsPage(),
+        '/schedule': (context) => const SchedulePage(),
+        '/reports': (context) => const ReportsPage(),
+        '/settings': (context) => const SettingsPage(),
+        // TODO: adicionar navegação de tudo relacionado aos usuários
+      }
     );
   }
 }

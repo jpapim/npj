@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'register.dart';
 import 'forget_password.dart';
-import 'home.dart';
 
 //Linhas de código abaixo para conseguir captar o FirebaseAuthException
 String parseFirebaseAuthExceptionMessage(
@@ -33,15 +32,9 @@ class LoginPage extends StatelessWidget {
         password: passwordController.text,
       );
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content:
-                Text('Login realizado com sucesso!')),
+        const SnackBar(content: Text('Login realizado com sucesso!')),
       );
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
-      );
-      
+      Navigator.pushReplacementNamed(context, '/');
     } on FirebaseAuthException catch (e) {
       final code = parseFirebaseAuthExceptionMessage(input: e.message);
 
@@ -65,7 +58,8 @@ class LoginPage extends StatelessWidget {
         child: Column(
           children: [
             Align(
-              alignment: const AlignmentDirectional(0, 0), //PROTÓTIPO ==  alignment: const AlignmentDirectional(0.6, -1),
+              alignment: const AlignmentDirectional(0, 0),
+              //PROTÓTIPO ==  alignment: const AlignmentDirectional(0.6, -1),
               child: Column(
                 children: [
                   const SizedBox(height: 25),

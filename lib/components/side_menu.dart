@@ -1,11 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:npj/pages/assisted_clients.dart';
-import 'package:npj/pages/assisted_process.dart';
-import 'package:npj/pages/home.dart';
-import 'package:npj/pages/reports.dart';
-import 'package:npj/pages/schedule.dart';
-import 'package:npj/pages/settings.dart';
-import 'package:npj/pages/statistics.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({super.key});
@@ -39,10 +32,7 @@ class SideMenu extends StatelessWidget {
               leading: const Icon(Icons.home, color: Colors.white),
               title: const Text('Home', style: TextStyle(color: Colors.white)),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
-                );
+                Navigator.pushReplacementNamed(context,('/'));
               },
             ),
             ListTile(
@@ -50,11 +40,7 @@ class SideMenu extends StatelessWidget {
               title: const Text('Processos',
                   style: TextStyle(color: Colors.white)),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const AssistedProcessPage()),
-                );
+                Navigator.pushReplacementNamed(context,('/process'));
               },
             ),
             ListTile(
@@ -62,11 +48,7 @@ class SideMenu extends StatelessWidget {
               title: const Text('Assistidos',
                   style: TextStyle(color: Colors.white)),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const AssistidosPage()),
-                );
+                Navigator.pushReplacementNamed(context, ('/clients'));
               },
             ),
             ListTile(
@@ -74,10 +56,7 @@ class SideMenu extends StatelessWidget {
               title: const Text('Relatórios',
                   style: TextStyle(color: Colors.white)),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ReportsPage()),
-                );
+                Navigator.pushReplacementNamed(context, '/reports');
               },
             ),
             ListTile(
@@ -85,10 +64,7 @@ class SideMenu extends StatelessWidget {
               title:
                   const Text('Agenda', style: TextStyle(color: Colors.white)),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SchedulePage()),
-                );
+                Navigator.pushReplacementNamed(context, '/schedule');
               },
             ),
             ListTile(
@@ -96,11 +72,7 @@ class SideMenu extends StatelessWidget {
               title: const Text('Estatisticas',
                   style: TextStyle(color: Colors.white)),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const StatisticsPage()),
-                );
+                Navigator.pushReplacementNamed(context, '/statistics');
               },
             ),
             ListTile(
@@ -108,10 +80,7 @@ class SideMenu extends StatelessWidget {
               title: const Text('Configurações',
                   style: TextStyle(color: Colors.white)),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SettingsPage()),
-                );
+                Navigator.pushReplacementNamed(context, '/settings');
               },
             )
           ],
