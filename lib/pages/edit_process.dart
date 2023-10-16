@@ -194,19 +194,24 @@ class _EditProcessPageState extends State<EditProcessPage> {
                                   fontStyle: FontStyle.normal),
                             ),
                             onPressed: () async {
-                              await updateProcesso(
-                                      idProcesso.text,
-                                      numeroProcesso.text,
-                                      aberturaProcesso.text,
-                                      acao.text,
-                                      dataDistricuicao.text,
-                                      varaProcesso.text,
-                                      forumProcesso.text,
-                                      statusProcesso.text)
-                                  .then((value) {
-                                Navigator.pushReplacementNamed(
-                                    context, ('/process'));
-                              });
+                              if (_formKey.currentState!.validate()) {
+                                await updateProcess(
+                                        idProcesso.text,
+                                        numeroProcesso.text,
+                                        aberturaProcesso.text,
+                                        acao.text,
+                                        dataDistricuicao.text,
+                                        varaProcesso.text,
+                                        forumProcesso.text,
+                                        statusProcesso.text)
+                                    .then((value) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text('Processo salvo!')));
+                                  Navigator.pushReplacementNamed(
+                                      context, ('/process'));
+                                });
+                              }
                             },
                             child: const Text('Modificar'),
                           ),

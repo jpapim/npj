@@ -367,8 +367,10 @@ Future openDialog(
                 ),
                 TextButton(
                   onPressed: () {
-                    deleteProcesso(idProcesso);
+                    deleteProcess(idProcesso);
 
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Processo excluido!')));
                     Navigator.pushReplacementNamed(context, ('/process'));
                   },
                   child: const Text("Sim, tenho certeza"),

@@ -17,6 +17,7 @@ class _AddProcessPageState extends State<AddProcessPage> {
   TextEditingController varaProcesso = TextEditingController();
   TextEditingController forumProcesso = TextEditingController();
   TextEditingController statusProcesso = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -175,25 +176,32 @@ class _AddProcessPageState extends State<AddProcessPage> {
                           alignment: Alignment.center,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color.fromARGB(255, 103, 22, 170),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 103, 22, 170),
                               textStyle: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
                                   fontStyle: FontStyle.normal),
                             ),
                             onPressed: () async {
-                              await addProcess(
-                                      numeroProcesso.text,
-                                      aberturaProcesso.text,
-                                      acao.text,
-                                      dataDistricuicao.text,
-                                      varaProcesso.text,
-                                      forumProcesso.text,
-                                      statusProcesso.text)
-                                  .then((value) {
-                                // print("Cadastrador");
-                                Navigator.pushReplacementNamed(context, ("/process"));
-                              });
+                              if (_formKey.currentState!.validate()) {
+                                await addProcess(
+                                        numeroProcesso.text,
+                                        aberturaProcesso.text,
+                                        acao.text,
+                                        dataDistricuicao.text,
+                                        varaProcesso.text,
+                                        forumProcesso.text,
+                                        statusProcesso.text)
+                                    .then((value) {
+                                  // print("Cadastrador");
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text('Processo salvo!')));
+                                  Navigator.pushReplacementNamed(
+                                      context, ("/process"));
+                                });
+                              }
                             },
                             child: const Text('Cadastrar'),
                           ),
