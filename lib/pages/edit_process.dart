@@ -18,7 +18,17 @@ class _EditProcessPageState extends State<EditProcessPage> {
   TextEditingController varaProcesso = TextEditingController();
   TextEditingController forumProcesso = TextEditingController();
   TextEditingController statusProcesso = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+
+  bool valueValidator(String? value) {
+    if (value != null && value.isEmpty) {
+      return true;
+    }
+    return false;
+  }
+
+  //TODO: inserir mais validações e encapsular elas em outro widget/classe para utillizar do add_process e no edit_process e validar cada campo
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +75,12 @@ class _EditProcessPageState extends State<EditProcessPage> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          validator: (String? value){
+                            if (valueValidator(value)){
+                              return 'Insira o número do processo';
+                            }
+                            return null;
+                          },
                           keyboardType: TextInputType.number,
                           controller: numeroProcesso,
                           style: const TextStyle(fontSize: 22),
@@ -83,6 +99,12 @@ class _EditProcessPageState extends State<EditProcessPage> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          validator: (String? value){
+                            if (valueValidator(value)){
+                              return 'Insira a data da abertura do processo';
+                            }
+                            return null;
+                          },
                           keyboardType: TextInputType.datetime,
                           controller: aberturaProcesso,
                           style: const TextStyle(fontSize: 22),

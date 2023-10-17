@@ -20,6 +20,13 @@ class _AddProcessPageState extends State<AddProcessPage> {
 
   final _formKey = GlobalKey<FormState>();
 
+  bool valueValidator(String? value) {
+    if (value != null && value.isEmpty) {
+      return true;
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +62,12 @@ class _AddProcessPageState extends State<AddProcessPage> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          validator: (String? value){
+                            if (valueValidator(value)){
+                              return 'Insira o número do processo';
+                            }
+                            return null;
+                          },
                           keyboardType: TextInputType.number,
                           controller: numeroProcesso,
                           style: const TextStyle(fontSize: 22),
@@ -73,6 +86,12 @@ class _AddProcessPageState extends State<AddProcessPage> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          validator: (String? value){
+                            if (valueValidator(value)){
+                              return 'Insira a data da abertura do processo';
+                            }
+                            return null;
+                          },
                           keyboardType: TextInputType.datetime,
                           controller: aberturaProcesso,
                           style: const TextStyle(fontSize: 22),
@@ -91,6 +110,12 @@ class _AddProcessPageState extends State<AddProcessPage> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          validator: (String? value){
+                            if (valueValidator(value)){
+                              return 'Insira a ação';
+                            }
+                            return null;
+                          },
                           controller: acao,
                           style: const TextStyle(fontSize: 22),
                           decoration: const InputDecoration(
@@ -108,6 +133,12 @@ class _AddProcessPageState extends State<AddProcessPage> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          validator: (String? value){
+                            if (valueValidator(value)){
+                              return 'Insira a data de distribuição do processo';
+                            }
+                            return null;
+                          },
                           keyboardType: TextInputType.datetime,
                           controller: dataDistricuicao,
                           style: const TextStyle(fontSize: 22),
@@ -122,6 +153,12 @@ class _AddProcessPageState extends State<AddProcessPage> {
                       ),
                       Expanded(
                         child: TextFormField(
+                          validator: (String? value){
+                            if (valueValidator(value)){
+                              return 'Insira a vara do processo';
+                            }
+                            return null;
+                          },
                           controller: varaProcesso,
                           style: const TextStyle(fontSize: 22),
                           decoration: const InputDecoration(
@@ -157,6 +194,12 @@ class _AddProcessPageState extends State<AddProcessPage> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          validator: (String? value){
+                            if (valueValidator(value)){
+                              return 'Insira o status do processo';
+                            }
+                            return null;
+                          },
                           controller: statusProcesso,
                           style: const TextStyle(fontSize: 22),
                           decoration: const InputDecoration(

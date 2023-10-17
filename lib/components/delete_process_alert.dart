@@ -24,7 +24,10 @@ Future<void> showDeleteConfirmationDialog(
           TextButton(
             onPressed: () {
               onDeleteConfirmed(idProcesso);
-              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Processo excluído!'), duration: Duration(milliseconds: 2000),));
+              Navigator.pushReplacementNamed(
+                  context, '/process');
             },
             child: const Text("Sim, tenho certeza"),
           ),

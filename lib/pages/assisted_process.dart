@@ -325,10 +325,6 @@ class MyData2 extends DataTableSource {
               _data[index].numeroProcesso ?? "N/A",
               (String idProcesso) async {
                 await deleteProcess(idProcesso);
-                ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Processo excluído!'), duration: Duration(milliseconds: 2000),));
-                Navigator.pushReplacementNamed(
-                    context, '/process');
               },
             );
           },
