@@ -1,6 +1,7 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:npj/components/delete_process_alert.dart';
 import 'package:npj/components/side_menu.dart';
 import 'package:npj/components/user_menu.dart';
 import 'package:npj/services/firebase_service.dart';
@@ -316,12 +317,24 @@ class MyData2 extends DataTableSource {
               },
               child: const Icon(Icons.edit)))),
       DataCell(Center(
-          child: ElevatedButton(
-              onPressed: () {
-                openDialog(context, _data[index].idProcesso ?? "N/A",
-                    _data[index].numeroProcesso ?? "N/A");
+        child: ElevatedButton(
+          onPressed: () {
+            showDeleteConfirmationDialog(
+              context,
+              _data[index].idProcesso ?? "N/A",
+              _data[index].numeroProcesso ?? "N/A",
+              (String idProcesso) async {
+                await deleteProcess(idProcesso);
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Processo excluído!'), duration: Duration(milliseconds: 2000),));
+                Navigator.pushReplacementNamed(
+                    context, '/process');
               },
-              child: const Icon(Icons.delete)))),
+            );
+          },
+          child: const Icon(Icons.delete),
+        ),
+      )),
     ]);
   }
 }
@@ -347,33 +360,3 @@ class Data {
     required this.varaProcesso,
   });
 }
-
-Future openDialog(
-        BuildContext context, String idProcesso, String numerorProcesso) =>
-    showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title:
-                  Text("Tem certeza de excluir o processo n°$numerorProcesso?"),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text(
-                    "Cancelar",
-                    style: TextStyle(color: Colors.red),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    deleteProcess(idProcesso);
-
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Processo excluido!')));
-                    Navigator.pushReplacementNamed(context, ('/process'));
-                  },
-                  child: const Text("Sim, tenho certeza"),
-                ),
-              ],
-            ));
