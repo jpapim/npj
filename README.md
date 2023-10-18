@@ -11,7 +11,7 @@ o pull request para que outros membros do projeto avaliem as mudanças.<br><br>
 ### O que precisa para rodar o projeto:<br>
 - VSCode ou outra IDE (Android Studio, IntelliJ, etc...).<br>
 - Conta no firebase (Certifique-se de estar no BD).<br>
-- Para logar no sistema use 'firebase login' no terminal e entre com a sua conta que contém o BD.<br>
+- Para logar no sistema use 'firebase login' no terminal e entre com a sua conta que contém o BD (certifique-se que você tenha ele instalado).<br>
 - NodeJS.<br>
 
 ### Para rodar o projeto:<br>
@@ -25,7 +25,7 @@ _Caso esteja no Android Studio ou o IntelliJ o procedimento é o mesmo, porém a
 
 ## _https://gprojuridico.web.app/#/_
 
-## Convenções de Nomenclatura
+### Convenções de Nomenclatura
 
 O projeto segue as seguintes convenções de nomenclatura:
 
