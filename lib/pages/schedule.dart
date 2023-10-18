@@ -4,6 +4,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:npj/components/header_title.dart';
 import 'package:npj/components/side_menu.dart';
 import 'package:npj/components/user_menu.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -76,25 +77,8 @@ class _SchedulePageState extends State<SchedulePage> {
       ),
       body: Column(
         children: [
-          Container(
-            height: 50,
-            color: const Color.fromARGB(255, 50, 39, 85),
-            child: const Row(
-              children: [
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "AGENDA",
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          const HeaderTitle(
+            title: 'AGENDA',
           ),
           TableCalendar<Event>(
             firstDay: kFirstDay,

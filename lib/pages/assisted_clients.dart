@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:npj/components/header_title.dart';
 import 'package:npj/components/side_menu.dart';
 import 'package:npj/components/user_menu.dart';
 
@@ -17,35 +18,10 @@ class AssistedClientsPage extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
+      body: const Column(
         children: [
-          Container(
-            height: 50,
-            color: const Color.fromARGB(255, 50, 39, 85),
-            child: const Row(
-              children: [
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "ASSISTIDOS",
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const Center(
-            child: Padding(
-              padding: EdgeInsets.only(
-                top: 200,
-              ),
-              child: Text('ASSISTIDOS'),
-            ),
+          HeaderTitle(
+            title: 'ASSISTIDOS',
           ),
         ],
       ),

@@ -2,6 +2,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:npj/components/delete_process_alert.dart';
+import 'package:npj/components/header_title.dart';
 import 'package:npj/components/side_menu.dart';
 import 'package:npj/components/user_menu.dart';
 import 'package:npj/services/firebase_service.dart';
@@ -73,26 +74,8 @@ class _AssistedProcessPageState extends State<AssistedProcessPage> {
       ),
       body: Column(
         children: [
-          //Header com "PROCESSOS"
-          Container(
-            height: 50,
-            color: const Color.fromARGB(255, 50, 39, 85),
-            child: const Row(
-              children: [
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "PROCESSOS",
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          const HeaderTitle(
+            title: 'PROCESSOS',
           ),
           //Container da barra de buscar
           SizedBox(
@@ -193,7 +176,7 @@ class _AssistedProcessPageState extends State<AssistedProcessPage> {
             ],
           ),
           //Final Mostrar Linha do caminho
-          //ListView Inicio
+          //ListView da tabela de processos Inicio
           Expanded(
             child: PaginatedDataTable2(
               showFirstLastButtons: true,
