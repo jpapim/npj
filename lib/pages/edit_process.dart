@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:npj/home.dart';
-import 'package:npj/pages/assisted_Process.dart';
-import 'package:npj/pages/assistidos.dart';
-import 'package:npj/pages/reports.dart';
-import 'package:npj/pages/schedule.dart';
-import 'package:npj/pages/settings.dart';
-import 'package:npj/pages/statistics.dart';
+import 'package:npj/components/side_menu.dart';
 import 'package:npj/services/firebase_service.dart';
 
-class EditarProcesso extends StatefulWidget {
-  const EditarProcesso({super.key});
+class EditProcessPage extends StatefulWidget {
+  const EditProcessPage({super.key});
 
   @override
-  State<EditarProcesso> createState() => _EditarProcessoState();
+  State<EditProcessPage> createState() => _EditProcessPageState();
 }
 
-class _EditarProcessoState extends State<EditarProcesso> {
+class _EditProcessPageState extends State<EditProcessPage> {
   TextEditingController idProcesso = TextEditingController();
   TextEditingController numeroProcesso = TextEditingController();
   TextEditingController aberturaProcesso = TextEditingController();
@@ -24,7 +18,17 @@ class _EditarProcessoState extends State<EditarProcesso> {
   TextEditingController varaProcesso = TextEditingController();
   TextEditingController forumProcesso = TextEditingController();
   TextEditingController statusProcesso = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+
+  bool valueValidator(String? value) {
+    if (value != null && value.isEmpty) {
+      return true;
+    }
+    return false;
+  }
+
+  //TODO: inserir mais validações e encapsular elas em outro widget/classe para utillizar do add_process e no edit_process e validar cada campo
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +75,13 @@ class _EditarProcessoState extends State<EditarProcesso> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          validator: (String? value){
+                            if (valueValidator(value)){
+                              return 'Insira o número do processo';
+                            }
+                            return null;
+                          },
+                          keyboardType: TextInputType.number,
                           controller: numeroProcesso,
                           style: const TextStyle(fontSize: 22),
                           decoration: const InputDecoration(
@@ -88,6 +99,13 @@ class _EditarProcessoState extends State<EditarProcesso> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          validator: (String? value){
+                            if (valueValidator(value)){
+                              return 'Insira a data da abertura do processo';
+                            }
+                            return null;
+                          },
+                          keyboardType: TextInputType.datetime,
                           controller: aberturaProcesso,
                           style: const TextStyle(fontSize: 22),
                           decoration: const InputDecoration(
@@ -122,6 +140,7 @@ class _EditarProcessoState extends State<EditarProcesso> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          keyboardType: TextInputType.datetime,
                           controller: dataDistricuicao,
                           style: const TextStyle(fontSize: 22),
                           decoration: const InputDecoration(
@@ -189,29 +208,32 @@ class _EditarProcessoState extends State<EditarProcesso> {
                           alignment: Alignment.center,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color.fromARGB(255, 103, 22, 170),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 103, 22, 170),
                               textStyle: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
                                   fontStyle: FontStyle.normal),
                             ),
                             onPressed: () async {
-                              await updateProcesso(
-                                      idProcesso.text,
-                                      numeroProcesso.text,
-                                      aberturaProcesso.text,
-                                      acao.text,
-                                      dataDistricuicao.text,
-                                      varaProcesso.text,
-                                      forumProcesso.text,
-                                      statusProcesso.text)
-                                  .then((value) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const AssistedProcessPage()));
-                              });
+                              if (_formKey.currentState!.validate()) {
+                                await updateProcess(
+                                        idProcesso.text,
+                                        numeroProcesso.text,
+                                        aberturaProcesso.text,
+                                        acao.text,
+                                        dataDistricuicao.text,
+                                        varaProcesso.text,
+                                        forumProcesso.text,
+                                        statusProcesso.text)
+                                    .then((value) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text('Processo salvo!')));
+                                  Navigator.pushReplacementNamed(
+                                      context, ('/process'));
+                                });
+                              }
                             },
                             child: const Text('Modificar'),
                           ),
@@ -228,137 +250,7 @@ class _EditarProcessoState extends State<EditarProcesso> {
 
       //Fim ListView
       //Inicio Menu Lateral
-      drawer: Theme(
-        data: Theme.of(context).copyWith(
-          canvasColor: const Color.fromARGB(255, 24, 18, 43),
-        ),
-        child: Drawer(
-          // Add a ListView to the drawer. This ensures the user can scroll
-          // through the options in the drawer if there isn't enough vertical
-          // space to fit everything.
-          child: ListView(
-            // Important: Remove any padding from the ListView.
-            padding: EdgeInsets.zero,
-            children: [
-              Container(
-                height: 120,
-                width: 100,
-                margin: const EdgeInsets.all(25),
-                decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 24, 18, 43),
-                    image: DecorationImage(
-                        image: AssetImage("../assets/imagens/gpro.png"),
-                        fit: BoxFit.fill)),
-                child: const Text(''),
-              ),
-              ListTile(
-                leading: const Icon(Icons.home, color: Colors.white),
-                title:
-                    const Text('Menu', style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomePage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.menu, color: Colors.white),
-                title: const Text('Processos',
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AssistedProcessPage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.person, color: Colors.white),
-                title: const Text('Assistidos',
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AssistidosPage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.download, color: Colors.white),
-                title: const Text('Relatórios',
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ReportsPage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.calendar_month, color: Colors.white),
-                title:
-                    const Text('Agenda', style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SchedulePage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.bar_chart, color: Colors.white),
-                title: const Text('Estatisticas',
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const StatisticsPage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.settings, color: Colors.white),
-                title: const Text('Configurações',
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SettingsPage()),
-                  );
-                },
-              )
-            ],
-          ),
-        ),
-      ),
+      drawer: const SideMenu(),
     );
   }
 }

@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'register.dart';
-import 'forget_password.dart';
-import 'home.dart';
-
-//Linhas de código abaixo para conseguir captar o FirebaseAuthException
+// Linhas de código abaixo para conseguir captar o FirebaseAuthException
 String parseFirebaseAuthExceptionMessage(
     {String plugin = "auth", required String? input}) {
   if (input == null) {
@@ -22,39 +18,42 @@ String parseFirebaseAuthExceptionMessage(
   return "unknown";
 }
 
-class LoginPage extends StatelessWidget {
+class ForgetPasswordPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
 
-  void _loginUser(BuildContext context) async {
+  ForgetPasswordPage({super.key});
+
+  void _resetPassword(BuildContext context) async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.sendPasswordResetEmail(
         email: emailController.text,
-        password: passwordController.text,
       );
+      emailController.clear();
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
             content:
-                Text('Login realizado com sucesso!')),
+                Text('Um email foi enviado solicitando alteração de senha')),
       );
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
-      );
-      
     } on FirebaseAuthException catch (e) {
       final code = parseFirebaseAuthExceptionMessage(input: e.message);
 
-      if (code == 'wrong-password' || code == 'user-not-found') {
+      if (code.toString() == 'invalid-email') {
         ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Usuário ou senha inválidos')));
-      } else if (code == 'invalid-email') {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text('Email inválido')));
+          const SnackBar(content: Text('Email informado é inválido')),
+        );
+      }
+      if (code.toString() == 'missing-email') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Email não foi informado')),
+        );
+      }
+      if (code.toString() == 'user-not-found') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Esse email não foi registrado')),
+        );
       }
     } catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(e.toString())));
+      // print('Error: $e');
     }
   }
 
@@ -65,7 +64,8 @@ class LoginPage extends StatelessWidget {
         child: Column(
           children: [
             Align(
-              alignment: const AlignmentDirectional(0, 0), //PROTÓTIPO ==  alignment: const AlignmentDirectional(0.6, -1),
+              alignment: const AlignmentDirectional(0, 0),
+              //PROTÓTIPO ==  alignment: const AlignmentDirectional(0.6, -1),
               child: Column(
                 children: [
                   const SizedBox(height: 25),
@@ -90,30 +90,37 @@ class LoginPage extends StatelessWidget {
                             child: const Text(''),
                           ),
                           const SizedBox(height: 20),
+                          const Text(
+                            'Problemas para entrar?',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Color.fromARGB(255, 0, 0, 0),
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                            maxLines: 3,
+                          ),
+                          const SizedBox(height: 20),
+                          const Text(
+                            'Insira o seu email de matrícula e enviaremos um link para você acessar a sua conta.',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Color.fromARGB(255, 0, 0, 0),
+                            ),
+                            textAlign: TextAlign.center,
+                            maxLines: 3,
+                          ),
+                          const SizedBox(height: 20),
                           TextField(
                             controller: emailController,
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
-                              hintText: 'E-mail',
+                              //hintText: 'E-mail',
+                              labelText: 'E-mail',
                               labelStyle: TextStyle(
                                 color: Colors.black,
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 10),
-                          TextField(
-                            style: const TextStyle(color: Colors.black),
-                            controller: passwordController,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(width: 0.5),
-                              ),
-                              hintText: 'Senha',
-                              labelStyle: TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                            obscureText: true,
                           ),
                           const SizedBox(height: 20),
                           ElevatedButton(
@@ -124,22 +131,8 @@ class LoginPage extends StatelessWidget {
                                 textStyle: const TextStyle(
                                   fontSize: 18,
                                 )),
-                            onPressed: () => _loginUser(context),
-                            child: const Text('Entrar'),
-                          ),
-                          const SizedBox(height: 20),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ForgetPasswordPage()),
-                              );
-                            },
-                            child: const Text(
-                              'Esqueceu a senha?',
-                              style: TextStyle(fontSize: 15),
-                            ),
+                            onPressed: () => _resetPassword(context),
+                            child: const Text('Recuperar conta'),
                           ),
                           const SizedBox(height: 20)
                         ],
@@ -156,16 +149,12 @@ class LoginPage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("Não tem uma conta?"),
+                        const Text("Já tem uma conta?"),
                         TextButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RegisterPage()),
-                            );
+                            Navigator.pushReplacementNamed(context, '/login');
                           },
-                          child: const Text("Cadastre-se"),
+                          child: const Text("Voltar ao login"),
                         ),
                       ],
                     ),

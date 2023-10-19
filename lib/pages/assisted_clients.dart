@@ -3,8 +3,8 @@ import 'package:npj/components/header_title.dart';
 import 'package:npj/components/side_menu.dart';
 import 'package:npj/components/user_menu.dart';
 
-class StatisticsPage extends StatelessWidget {
-  const StatisticsPage({super.key});
+class AssistedClientsPage extends StatelessWidget {
+  const AssistedClientsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,9 @@ class StatisticsPage extends StatelessWidget {
       ),
       body: const Column(
         children: [
-          HeaderTitle(title: "ESTATÍSTICAS")
+          HeaderTitle(
+            title: 'ASSISTIDOS',
+          ),
         ],
       ),
       drawer: const SideMenu(),

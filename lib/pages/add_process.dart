@@ -1,50 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:npj/home.dart';
-import 'package:npj/pages/assisted_Process.dart';
-import 'package:npj/pages/assistidos.dart';
-import 'package:npj/pages/schedule.dart';
-import 'package:npj/pages/settings.dart';
-import 'package:npj/pages/statistics.dart';
+import 'package:npj/components/side_menu.dart';
 import 'package:npj/services/firebase_service.dart';
 
-import 'reports.dart';
-
-class AddProcessoPage extends StatelessWidget {
-  const AddProcessoPage({super.key});
-
-  static const appTitle = 'GProJuridico';
+class AddProcessPage extends StatefulWidget {
+  const AddProcessPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: appTitle,
-      theme: ThemeData(
-        colorSchemeSeed: const Color.fromARGB(255, 15, 12, 29),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromARGB(255, 24, 18, 43),
-          centerTitle: true,
-          titleTextStyle: TextStyle(
-            fontSize: 44,
-            fontFamily: "Built-SemiBold",
-            color: Colors.white,
-          ),
-        ),
-      ),
-      home: const AddProcesso(title: appTitle),
-    );
-  }
+  State<AddProcessPage> createState() => _AddProcessPageState();
 }
 
-class AddProcesso extends StatefulWidget {
-  const AddProcesso({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<AddProcesso> createState() => _AddProcessoState();
-}
-
-class _AddProcessoState extends State<AddProcesso> {
+class _AddProcessPageState extends State<AddProcessPage> {
   TextEditingController numeroProcesso = TextEditingController();
   TextEditingController aberturaProcesso = TextEditingController();
   TextEditingController acao = TextEditingController();
@@ -52,7 +17,15 @@ class _AddProcessoState extends State<AddProcesso> {
   TextEditingController varaProcesso = TextEditingController();
   TextEditingController forumProcesso = TextEditingController();
   TextEditingController statusProcesso = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+
+  bool valueValidator(String? value) {
+    if (value != null && value.isEmpty) {
+      return true;
+    }
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +62,13 @@ class _AddProcessoState extends State<AddProcesso> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          validator: (String? value){
+                            if (valueValidator(value)){
+                              return 'Insira o número do processo';
+                            }
+                            return null;
+                          },
+                          keyboardType: TextInputType.number,
                           controller: numeroProcesso,
                           style: const TextStyle(fontSize: 22),
                           decoration: const InputDecoration(
@@ -106,6 +86,13 @@ class _AddProcessoState extends State<AddProcesso> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          validator: (String? value){
+                            if (valueValidator(value)){
+                              return 'Insira a data da abertura do processo';
+                            }
+                            return null;
+                          },
+                          keyboardType: TextInputType.datetime,
                           controller: aberturaProcesso,
                           style: const TextStyle(fontSize: 22),
                           decoration: const InputDecoration(
@@ -123,6 +110,12 @@ class _AddProcessoState extends State<AddProcesso> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          validator: (String? value){
+                            if (valueValidator(value)){
+                              return 'Insira a ação';
+                            }
+                            return null;
+                          },
                           controller: acao,
                           style: const TextStyle(fontSize: 22),
                           decoration: const InputDecoration(
@@ -140,6 +133,13 @@ class _AddProcessoState extends State<AddProcesso> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          validator: (String? value){
+                            if (valueValidator(value)){
+                              return 'Insira a data de distribuição do processo';
+                            }
+                            return null;
+                          },
+                          keyboardType: TextInputType.datetime,
                           controller: dataDistricuicao,
                           style: const TextStyle(fontSize: 22),
                           decoration: const InputDecoration(
@@ -153,6 +153,12 @@ class _AddProcessoState extends State<AddProcesso> {
                       ),
                       Expanded(
                         child: TextFormField(
+                          validator: (String? value){
+                            if (valueValidator(value)){
+                              return 'Insira a vara do processo';
+                            }
+                            return null;
+                          },
                           controller: varaProcesso,
                           style: const TextStyle(fontSize: 22),
                           decoration: const InputDecoration(
@@ -188,6 +194,12 @@ class _AddProcessoState extends State<AddProcesso> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          validator: (String? value){
+                            if (valueValidator(value)){
+                              return 'Insira o status do processo';
+                            }
+                            return null;
+                          },
                           controller: statusProcesso,
                           style: const TextStyle(fontSize: 22),
                           decoration: const InputDecoration(
@@ -207,29 +219,32 @@ class _AddProcessoState extends State<AddProcesso> {
                           alignment: Alignment.center,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color.fromARGB(255, 103, 22, 170),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 103, 22, 170),
                               textStyle: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
                                   fontStyle: FontStyle.normal),
                             ),
                             onPressed: () async {
-                              await addProcess(
-                                      numeroProcesso.text,
-                                      aberturaProcesso.text,
-                                      acao.text,
-                                      dataDistricuicao.text,
-                                      varaProcesso.text,
-                                      forumProcesso.text,
-                                      statusProcesso.text)
-                                  .then((value) {
-                                // print("Cadastrador");
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const AssistedProcessPage()));
-                              });
+                              if (_formKey.currentState!.validate()) {
+                                await addProcess(
+                                        numeroProcesso.text,
+                                        aberturaProcesso.text,
+                                        acao.text,
+                                        dataDistricuicao.text,
+                                        varaProcesso.text,
+                                        forumProcesso.text,
+                                        statusProcesso.text)
+                                    .then((value) {
+                                  // print("Cadastrador");
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text('Processo salvo!')));
+                                  Navigator.pushReplacementNamed(
+                                      context, ("/process"));
+                                });
+                              }
                             },
                             child: const Text('Cadastrar'),
                           ),
@@ -246,137 +261,7 @@ class _AddProcessoState extends State<AddProcesso> {
 
       //Fim ListView
       //Inicio Menu Lateral
-      drawer: Theme(
-        data: Theme.of(context).copyWith(
-          canvasColor: const Color.fromARGB(255, 24, 18, 43),
-        ),
-        child: Drawer(
-          // Add a ListView to the drawer. This ensures the user can scroll
-          // through the options in the drawer if there isn't enough vertical
-          // space to fit everything.
-          child: ListView(
-            // Important: Remove any padding from the ListView.
-            padding: EdgeInsets.zero,
-            children: [
-              Container(
-                height: 120,
-                width: 100,
-                margin: const EdgeInsets.all(25),
-                decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 24, 18, 43),
-                    image: DecorationImage(
-                        image: AssetImage("../assets/imagens/gpro.png"),
-                        fit: BoxFit.fill)),
-                child: const Text(''),
-              ),
-              ListTile(
-                leading: const Icon(Icons.home, color: Colors.white),
-                title:
-                    const Text('Menu', style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomePage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.menu, color: Colors.white),
-                title: const Text('Processos',
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AssistedProcessPage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.person, color: Colors.white),
-                title: const Text('Assistidos',
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AssistidosPage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.download, color: Colors.white),
-                title: const Text('Relatórios',
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ReportsPage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.calendar_month, color: Colors.white),
-                title:
-                    const Text('Agenda', style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SchedulePage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.bar_chart, color: Colors.white),
-                title: const Text('Estatisticas',
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const StatisticsPage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.settings, color: Colors.white),
-                title: const Text('Configurações',
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SettingsPage()),
-                  );
-                },
-              )
-            ],
-          ),
-        ),
-      ),
+      drawer: const SideMenu(),
     );
   }
 }

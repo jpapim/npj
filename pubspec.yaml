@@ -69,7 +69,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-   - imagens/
+   - assets/images/
    # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -87,7 +87,7 @@ flutter:
   fonts: 
     - family: Built-SemiBold
       fonts:
-        - asset: fonts/Built-SemiBold.ttf
+        - asset: assets/fonts/Built-SemiBold.ttf
   
   # fonts:
   #   - family: Schyler

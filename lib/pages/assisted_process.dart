@@ -1,57 +1,20 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:npj/home.dart';
-import 'package:npj/pages/add_process.dart';
-import 'package:npj/pages/edit_processo.dart';
-import 'package:npj/pages/assistidos.dart';
-import 'package:npj/pages/reports.dart';
-import 'package:npj/pages/schedule.dart';
-import 'package:npj/pages/settings.dart';
-import 'package:npj/pages/statistics.dart';
+import 'package:npj/components/delete_process_alert.dart';
+import 'package:npj/components/header_title.dart';
+import 'package:npj/components/side_menu.dart';
+import 'package:npj/components/user_menu.dart';
 import 'package:npj/services/firebase_service.dart';
 
-class AssistedProcessPage extends StatelessWidget {
-  const AssistedProcessPage({Key? key});
-
-  static const appTitle = 'GProJuridico';
+class AssistedProcessPage extends StatefulWidget {
+  const AssistedProcessPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: appTitle,
-      theme: ThemeData(
-        colorSchemeSeed: const Color.fromARGB(255, 15, 12, 29),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromARGB(255, 24, 18, 43),
-          centerTitle: true,
-          titleTextStyle: TextStyle(
-            fontSize: 44,
-            fontFamily: "Built-SemiBold",
-            color: Colors.white,
-          ),
-        ),
-      ),
-      initialRoute: '/',
-      routes: {
-        '/addProcess': (context) => const AddProcessoPage(),
-        '/editProcess': (context) => const EditarProcesso(),
-      },
-      home: const MyAssistedPage(title: appTitle),
-    );
-  }
+  State<AssistedProcessPage> createState() => _AssistedProcessPageState();
 }
 
-class MyAssistedPage extends StatefulWidget {
-  const MyAssistedPage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyAssistedPage> createState() => _MyAssistedPageState();
-}
-
-class _MyAssistedPageState extends State<MyAssistedPage> {
+class _AssistedProcessPageState extends State<AssistedProcessPage> {
   List<Data> allData = [];
   List<Data> filteredData = [];
 
@@ -93,7 +56,15 @@ class _MyAssistedPageState extends State<MyAssistedPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("GPRO")),
+      appBar: AppBar(
+        title: const Text("GPRO"),
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 16.0),
+            child: UserPopupMenu(),
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await Navigator.pushNamed(context, '/addProcess');
@@ -103,30 +74,12 @@ class _MyAssistedPageState extends State<MyAssistedPage> {
       ),
       body: Column(
         children: [
-          //Header com "ASSISTIDO"
-          Container(
-            height: 50,
-            color: const Color.fromARGB(255, 50, 39, 85),
-            child: const Row(
-              children: [
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "ASSISTIDOS",
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          const HeaderTitle(
+            title: 'PROCESSOS',
           ),
           //Container da barra de buscar
           SizedBox(
-            height: 60,
+            height: 64,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -223,7 +176,7 @@ class _MyAssistedPageState extends State<MyAssistedPage> {
             ],
           ),
           //Final Mostrar Linha do caminho
-          //ListView Inicio
+          //ListView da tabela de processos Inicio
           Expanded(
             child: PaginatedDataTable2(
               showFirstLastButtons: true,
@@ -294,133 +247,7 @@ class _MyAssistedPageState extends State<MyAssistedPage> {
       ),
       //Fim ListView
       //Inicio Menu Lateral
-      drawer: Theme(
-        data: Theme.of(context).copyWith(
-          canvasColor: const Color.fromARGB(255, 24, 18, 43),
-        ),
-        child: Drawer(
-          // Add a ListView to the drawer. This ensures the user can scroll
-          // through the options in the drawer if there isn't enough vertical
-          // space to fit everything.
-          child: ListView(
-            // Important: Remove any padding from the ListView.
-            padding: EdgeInsets.zero,
-            children: [
-              Container(
-                height: 120,
-                width: 100,
-                margin: const EdgeInsets.all(25),
-                decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 24, 18, 43),
-                    image: DecorationImage(
-                        image: AssetImage("../assets/imagens/gpro.png"),
-                        fit: BoxFit.fill)),
-                child: const Text(''),
-              ),
-              ListTile(
-                leading: const Icon(Icons.home, color: Colors.white),
-                title:
-                    const Text('Menu', style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomePage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.menu, color: Colors.white),
-                title: const Text('Processos',
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.person, color: Colors.white),
-                title: const Text('Assistidos',
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AssistidosPage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.download, color: Colors.white),
-                title: const Text('Relatórios',
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ReportsPage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.calendar_month, color: Colors.white),
-                title:
-                    const Text('Agenda', style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SchedulePage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.bar_chart, color: Colors.white),
-                title: const Text('Estatisticas',
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const StatisticsPage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.settings, color: Colors.white),
-                title: const Text('Configurações',
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SettingsPage()),
-                  );
-                },
-              )
-            ],
-          ),
-        ),
-      ),
+      drawer: const SideMenu(),
     );
   }
 }
@@ -433,10 +260,13 @@ class MyData2 extends DataTableSource {
 
   @override
   bool get isRowCountApproximate => false;
+
   @override
   int get rowCount => _data.length;
+
   @override
   int get selectedRowCount => 0;
+
   @override
   DataRow getRow(int index) {
     return DataRow(cells: [
@@ -453,7 +283,7 @@ class MyData2 extends DataTableSource {
       DataCell(Center(
           child: ElevatedButton(
               onPressed: () async {
-                await Navigator.pushNamed(
+                await Navigator.pushReplacementNamed(
                   context,
                   "/editProcess",
                   arguments: {
@@ -470,12 +300,20 @@ class MyData2 extends DataTableSource {
               },
               child: const Icon(Icons.edit)))),
       DataCell(Center(
-          child: ElevatedButton(
-              onPressed: () {
-                openDialog(context, _data[index].idProcesso ?? "N/A",
-                    _data[index].numeroProcesso ?? "N/A");
+        child: ElevatedButton(
+          onPressed: () {
+            showDeleteConfirmationDialog(
+              context,
+              _data[index].idProcesso ?? "N/A",
+              _data[index].numeroProcesso ?? "N/A",
+              (String idProcesso) async {
+                await deleteProcess(idProcesso);
               },
-              child: const Icon(Icons.delete)))),
+            );
+          },
+          child: const Icon(Icons.delete),
+        ),
+      )),
     ]);
   }
 }
@@ -501,34 +339,3 @@ class Data {
     required this.varaProcesso,
   });
 }
-
-Future openDialog(
-        BuildContext context, String idProcesso, String numerorProcesso) =>
-    showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title:
-                  Text("Tem certeza de excluir o processo n°$numerorProcesso?"),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text(
-                    "Cancelar",
-                    style: TextStyle(color: Colors.red),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    deleteProcesso(idProcesso);
-
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const AssistedProcessPage()));
-                  },
-                  child: const Text("Sim, tenho certeza"),
-                ),
-              ],
-            ));

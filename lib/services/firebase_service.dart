@@ -23,7 +23,7 @@ Future<void> addProcess(
 }
 
 //Atualizar Processo no banco de dados
-Future<void> updateProcesso(
+Future<void> updateProcess(
     String idProcesso,
     String numeroProcesso,
     String aberturaProcesso,
@@ -44,6 +44,6 @@ Future<void> updateProcesso(
 }
 
 //Apagar Processo do banco de dados
-Future<void> deleteProcesso(String idProcesso) async {
+Future<void> deleteProcess(String idProcesso) async {
   await db.collection("processo").doc(idProcesso).delete();
 }

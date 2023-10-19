@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:npj/login.dart';
 
 // Linhas de código abaixo para conseguir captar o FirebaseAuthException
 String parseFirebaseAuthExceptionMessage(
@@ -79,16 +78,12 @@ class RegisterPage extends StatelessWidget {
           'Registro em': dataFormatada,
         });
 
-        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
               content: Text(
                   'Registro realizado com sucesso! = ${userCredential.user!.uid}')),
         );
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => LoginPage()),
-        );
+        Navigator.pushReplacementNamed(context, '/login');
       } on FirebaseAuthException catch (e) {
         final code = parseFirebaseAuthExceptionMessage(input: e.message);
 
@@ -139,7 +134,7 @@ class RegisterPage extends StatelessWidget {
                 width: 250,
                 margin: const EdgeInsets.only(bottom: 5),
                 child: Image.asset(
-                  '../assets/imagens/logo.jpg',
+                  'assets/images/logo.jpg',
                   //fit: BoxFit.cover,
                 ),
               ),
@@ -169,6 +164,7 @@ class RegisterPage extends StatelessWidget {
               SizedBox(
                 width: 400,
                 child: TextField(
+                  keyboardType: TextInputType.emailAddress,
                   controller: emailController,
                   decoration: const InputDecoration(
                     hintText: 'E-mail',
@@ -256,11 +252,7 @@ class RegisterPage extends StatelessWidget {
                       ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginPage()),
-                          );
+                          Navigator.pushReplacementNamed(context, '/login');
                         },
                     ),
                   ],

@@ -3,14 +3,14 @@ import 'package:npj/components/header_title.dart';
 import 'package:npj/components/side_menu.dart';
 import 'package:npj/components/user_menu.dart';
 
-class StatisticsPage extends StatelessWidget {
-  const StatisticsPage({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("GPRO"),
+        title: const Text("GPRO"), // Header com "GPRO"
         actions: const [
           Padding(
             padding: EdgeInsets.only(right: 16.0),
@@ -20,7 +20,9 @@ class StatisticsPage extends StatelessWidget {
       ),
       body: const Column(
         children: [
-          HeaderTitle(title: "ESTATÍSTICAS")
+          HeaderTitle(
+            title: 'HOME',
+          ),
         ],
       ),
       drawer: const SideMenu(),
