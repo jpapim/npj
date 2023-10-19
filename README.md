@@ -31,14 +31,14 @@ O projeto segue as seguintes convenções de nomenclatura:
 
 ### Variáveis e Funções
 
-- Utilize o padrão snake_case para nomes de variáveis e funções.
+- Utilize o padrão lowerCamelCase para nomes de variáveis e funções.
 - Escolha nomes descritivos e significativos para suas variáveis e funções.
 - Exemplo:
 
   ```dart
-  int my_variable_name = 42;
+  int myVariableName = 42;
   
-  void calculate_total_price() {
+  void calculateTotalPrice() {
     // ...
   }
 
@@ -51,4 +51,4 @@ Exemplo:
 
 ```dart
 Nome do Arquivo: my_widget.dart
-Nome da Função: calculate_total_price() {}
+Nome da Função: calculateTotalPrice() {}
